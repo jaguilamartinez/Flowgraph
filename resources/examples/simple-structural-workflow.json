@@ -1,0 +1,97 @@
+{
+  "last_node_id": 4,
+  "last_link_id": 3,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "Analysis stages/Components/ProblemData",
+      "pos": [80, 180],
+      "size": [240, 142],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "Output",
+          "type": "problem_data",
+          "links": [1]
+        }
+      ],
+      "properties": {
+        "problem_name": "SimpleStructuralTest",
+        "parallel_type": "OpenMP",
+        "echo_level": 1,
+        "start_time": 0,
+        "end_time": 1
+      }
+    },
+    {
+      "id": 2,
+      "type": "Analysis stages/StructuralMechanicsAnalysis",
+      "pos": [420, 120],
+      "size": [310, 190],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        { "name": "Stage", "type": "stage_flow", "link": null },
+        { "name": "Stage Pre", "type": "stage_pre", "link": null },
+        { "name": "Stage Post", "type": "stage_post", "link": null },
+        { "name": "Problem Data", "type": "problem_data", "link": 1 },
+        { "name": "Solver Settings", "type": "solver_settings", "link": null },
+        { "name": "Processes", "type": "process_list", "link": null },
+        { "name": "Output Processes", "type": "output_process_list", "link": null }
+      ],
+      "outputs": [
+        { "name": "Stage", "type": "stage_flow", "links": [2] },
+        { "name": "Name", "type": "string", "links": null }
+      ],
+      "properties": {}
+    },
+    {
+      "id": 3,
+      "type": "Orchestrators/SequentialOrchestrator",
+      "pos": [820, 150],
+      "size": [260, 120],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        { "name": "Stage", "type": "stage_flow", "link": 2 },
+        { "name": "Save Checkpoints", "type": null, "link": null },
+        { "name": "Load Checkpoint", "type": null, "link": null }
+      ],
+      "outputs": [
+        { "name": "Output", "type": "stage_flow", "links": [3] }
+      ],
+      "properties": {
+        "echo_level": 0,
+        "execution_list": [],
+        "load_from_checkpoint": null,
+        "stage_checkpoints": false
+      }
+    },
+    {
+      "id": 4,
+      "type": "IO/JSONView",
+      "pos": [1170, 170],
+      "size": [180, 60],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        { "name": "json", "type": 0, "link": 3 }
+      ],
+      "properties": {}
+    }
+  ],
+  "links": [
+    [1, 1, 0, 2, 3, "problem_data"],
+    [2, 2, 0, 3, 0, "stage_flow"],
+    [3, 3, 0, 4, 0, 0]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

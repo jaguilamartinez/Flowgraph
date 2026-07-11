@@ -2,6 +2,46 @@
 
 A node editor for Kratos Problemtypes
 
+## Docker development stack
+
+The repository also contains a development application composed of:
+
+- `frontend`: Next.js application at http://localhost:3000
+- `api`: FastAPI job API and docs at http://localhost:8000/docs
+- `flowgraph`: this editor at http://localhost:8182
+- `runner`: an isolated Kratos worker based on the configured Kratos image
+
+Copy the example environment and start the stack:
+
+```console
+cp .env.example .env
+docker compose up --build
+```
+
+On Apple Silicon the Kratos CI image runs through Docker's amd64 emulation. Override
+`KRATOS_PLATFORM` in `.env` if a native image becomes available.
+
+The requested `kratos-image-ci-ubuntu-22-04` image contains Kratos build tools and
+third-party libraries, but not the compiled `KratosMultiphysics` Python module. The
+runner therefore installs the official `KratosMultiphysics[all]` wheel set at build time.
+Pin another release with `KRATOS_VERSION`, or set `KRATOS_PYTHONPATH` when adapting
+the runner to a bind-mounted source build.
+
+The API and runner communicate through the `simulations` volume. `POST /api/runs`
+atomically creates a job containing `ProjectParameters.json` and `MainKratos.py`;
+the runner claims queued jobs, captures `runner.log`, and updates `status.json`.
+The default job is an import smoke test. A real application should send its own
+Kratos entrypoint in the `main_script` field.
+
+Useful commands:
+
+```console
+docker compose logs -f runner
+docker compose restart api runner
+docker compose down
+docker compose down -v  # also deletes development jobs and dependency volumes
+```
+
 ## Installation
 Install [node.js](https://nodejs.org/en/download/package-manager)
 

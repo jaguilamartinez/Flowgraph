@@ -1,0 +1,7 @@
+{
+  "host": "0.0.0.0",
+  "port": "8182",
+  "kratos_root": "",
+  "working_dir": "/workspace/jobs",
+  "python_binary": "python3"
+}

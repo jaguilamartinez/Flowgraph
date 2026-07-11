@@ -48,7 +48,8 @@ class RunProblem {
         this.addInput("data", 0);
 
         this.virtual_run_ip = this.addWidget("string", "Ip", "localhost");
-        this.virtual_run_pt = this.addWidget("string", "Port", "8182");
+        // The development stack runs simulations through the isolated FastAPI/runner services.
+        this.virtual_run_pt = this.addWidget("string", "Port", "8000");
 
         this._debug = this.addWidget("text", "Debug", "");
 

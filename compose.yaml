@@ -1,0 +1,76 @@
+name: flowgraph-dev
+
+services:
+  frontend:
+    build:
+      context: ./apps/frontend
+      target: development
+    command: npm run dev
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+      NEXT_PUBLIC_FLOWGRAPH_URL: ${NEXT_PUBLIC_FLOWGRAPH_URL:-http://localhost:8182}
+      WATCHPACK_POLLING: "true"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/frontend:/app
+      - frontend_node_modules:/app/node_modules
+      - frontend_next:/app/.next
+    depends_on:
+      api:
+        condition: service_healthy
+
+  api:
+    build:
+      context: ./apps/api
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    environment:
+      FLOWGRAPH_URL: http://flowgraph:8182
+      JOBS_ROOT: /workspace/jobs
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./apps/api:/app
+      - simulations:/workspace/jobs
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  flowgraph:
+    build:
+      context: .
+      dockerfile: docker/flowgraph.Dockerfile
+    command: sh -c "test -x node_modules/.bin/nodemon || npm ci; exec npm run devstart"
+    environment:
+      NODE_ENV: docker
+    ports:
+      - "8182:8182"
+    volumes:
+      - .:/app
+      - flowgraph_node_modules:/app/node_modules
+      - simulations:/workspace/jobs
+
+  runner:
+    build:
+      context: ./apps/runner
+      args:
+        KRATOS_IMAGE: ${KRATOS_IMAGE:-kratosmultiphysics/kratos-image-ci-ubuntu-22-04:latest}
+        KRATOS_VERSION: ${KRATOS_VERSION:-10.4.3}
+    platform: ${KRATOS_PLATFORM:-linux/amd64}
+    environment:
+      JOBS_ROOT: /workspace/jobs
+      POLL_SECONDS: ${RUNNER_POLL_SECONDS:-1}
+      PYTHONPATH: ${KRATOS_PYTHONPATH:-}
+    volumes:
+      - ./apps/runner:/runner
+      - simulations:/workspace/jobs
+    init: true
+    restart: unless-stopped
+
+volumes:
+  flowgraph_node_modules:
+  frontend_node_modules:
+  frontend_next:
+  simulations:

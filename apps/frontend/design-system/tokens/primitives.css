@@ -2,9 +2,8 @@
  * Design-system primitive tokens.
  *
  * Raw scales only. Feature code must never read these directly —
- * consume the semantic tokens in `semantic.css` instead.
- * Anchors come from the reference palette in
- * docs/product-design-specification.md §14.7.
+ * consume the semantic tokens in `semantic.css` instead. Primitive values
+ * remain implementation details of the semantic token layer.
  */
 
 :root {
@@ -87,7 +86,7 @@
   --ds-red-800: #741710;
   --ds-red-900: #53110c;
 
-  /* Purple — unapplied assistant proposals only */
+  /* Purple — unapplied model-generated proposals only */
   --ds-purple-50: #f0edf8;
   --ds-purple-100: #dfd8f0;
   --ds-purple-200: #c0b3e0;

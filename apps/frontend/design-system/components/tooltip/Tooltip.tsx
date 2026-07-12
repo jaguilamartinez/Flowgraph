@@ -17,7 +17,7 @@ export function TooltipProvider({ children }: { children: ReactNode }) {
 export interface TooltipProps {
   /**
    * Supplementary text only. Constraints and important state belong in
-   * visible UI, never solely in a tooltip (product spec §7.4).
+   * visible UI rather than solely in a tooltip.
    */
   content: ReactNode;
   children: ReactNode;

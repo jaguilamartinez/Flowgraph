@@ -23,12 +23,12 @@ export function FeedbackSection() {
     <Section
       id="feedback"
       title="Feedback and status"
-      description="Persistence, validation, compilation, and simulation are independent dimensions — never one green/red light. Toasts are transient confirmations; details always live in a persistent surface."
+      description="Persistence, validation, compilation, and simulation are separate state dimensions. Render them independently rather than as one aggregate indicator. Toasts confirm transient events; persistent surfaces retain diagnostic details."
     >
       <Grid>
         <Specimen
           label="StatusMessage"
-          note="Quiet header states. announce renders a polite live region (WCAG 4.1.3)."
+          note="Compact status text for headers. The announce prop adds a polite live region (WCAG 4.1.3)."
         >
           <Row>
             <StatusMessage status="neutral" busy announce>
@@ -94,11 +94,12 @@ export function FeedbackSection() {
         <Specimen label="InlineAlert">
           <Stack wide>
             <InlineAlert status="info" title="Proposal based on Draft 12">
-              The assistant assumed a linear elastic material because none was specified.
+              The proposal uses a linear elastic material because the request did not specify
+              a material model.
             </InlineAlert>
             <InlineAlert status="success">Configuration compiled for Kratos 10.4.3.</InlineAlert>
             <InlineAlert status="warning" title="1 warning">
-              Output interval 0.001 s will produce roughly 12 GB of results.
+              Estimated output size at a 0.001 s interval: approximately 12 GB.
             </InlineAlert>
             <InlineAlert
               status="danger"
@@ -109,7 +110,7 @@ export function FeedbackSection() {
                     Focus node
                   </Button>
                   <Button size="sm" variant="ghost">
-                    Explain
+                    Why this is required
                   </Button>
                 </>
               }
@@ -133,8 +134,7 @@ export function FeedbackSection() {
                 </Button>
               }
             >
-              <strong>Offline.</strong> Edits are kept locally and will sync when the
-              connection returns.
+              <strong>Connection lost.</strong> Saving and remote operations are paused.
             </Banner>
             <Banner status="info" onDismiss={() => {}}>
               This project targets the local Kratos 10.4.3 environment.
@@ -142,7 +142,10 @@ export function FeedbackSection() {
           </Stack>
         </Specimen>
 
-        <Specimen label="Toast" note="Fired from useToast(). Auto-dismisses; swipe or Esc to close.">
+        <Specimen
+          label="Toast"
+          note="Created through useToast(). Toasts auto-dismiss and include an explicit dismiss control."
+        >
           <Row>
             <Button
               variant="secondary"
@@ -177,7 +180,7 @@ export function FeedbackSection() {
           </Row>
         </Specimen>
 
-        <Specimen label="Skeleton" note="Only where the final shape is stable.">
+        <Specimen label="Skeleton" note="Use when the final content dimensions are known.">
           <Stack>
             <Row>
               <Skeleton shape="circle" width={28} height={28} />
@@ -190,12 +193,15 @@ export function FeedbackSection() {
           </Stack>
         </Specimen>
 
-        <Specimen label="EmptyState" note="Answers: what belongs here, why it’s empty, what to do next.">
+        <Specimen
+          label="EmptyState"
+          note="Describe what belongs in the area, why it is empty, and the available next action."
+        >
           <div style={{ border: "1px solid var(--ds-border-default)", borderRadius: "var(--ds-radius-md)" }}>
             <EmptyState
               icon={<FolderOpen size={20} />}
               title="No simulations yet"
-              description="Generate a valid configuration before running a simulation. Results and provenance will appear here."
+              description="Generate a valid configuration before running a simulation. This area contains generated results and provenance records."
               actions={
                 <>
                   <Button variant="primary" iconStart={<Plus size={14} aria-hidden />}>
@@ -208,11 +214,14 @@ export function FeedbackSection() {
           </div>
         </Specimen>
 
-        <Specimen label="ErrorState" note="What happened, what’s affected, what to do — plus a stable support code.">
+        <Specimen
+          label="ErrorState"
+          note="State the failure, its impact, the recovery action, and a stable support code."
+        >
           <div style={{ border: "1px solid var(--ds-border-default)", borderRadius: "var(--ds-radius-md)" }}>
             <ErrorState
               title="Simulation failed to start"
-              description="The execution environment did not become ready. Your configuration may still be valid — retrying is safe."
+              description="The execution environment did not become ready. Review the environment logs, then retry after it reports ready."
               actions={
                 <>
                   <Button variant="primary" iconStart={<RotateCcw size={14} aria-hidden />}>

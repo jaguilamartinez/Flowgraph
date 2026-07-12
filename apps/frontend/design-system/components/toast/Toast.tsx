@@ -32,7 +32,7 @@ const ToastContext = createContext<ToastContextValue | null>(null);
 /**
  * Imperative toast API. The nearest ToastProvider renders the queue.
  * Toasts are transient confirmations only — never the sole location of
- * error details or required actions (product spec §21).
+ * error details or required actions.
  */
 export function useToast(): ToastContextValue {
   const context = useContext(ToastContext);

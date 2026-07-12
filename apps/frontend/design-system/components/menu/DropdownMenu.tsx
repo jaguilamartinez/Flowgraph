@@ -36,7 +36,7 @@ export interface DropdownMenuItemProps
   icon?: ReactNode;
   /** Display-only shortcut hint, e.g. `⌘K`. */
   shortcut?: string;
-  /** Destructive action styling — red is reserved for real destruction. */
+  /** Destructive action styling; rendered with the danger color role. */
   destructive?: boolean;
 }
 

@@ -1,203 +1,103 @@
-# FlowGraph
+# Flowgraph AI
 
-A node editor for Kratos Problemtypes
+Flowgraph AI is the development workspace for a planned simulation-configuration application built around a versioned Flowgraph intermediate representation, a Next.js interface, a FastAPI control plane, and a Kratos execution service. The repository currently provides interface and service scaffolding; the new intermediate representation, language-model integration, compiler, and production execution path are not yet implemented.
 
-## Docker development stack
+The original Express/LiteGraph editor remains available as a compatibility and migration reference under [`apps/flowgraph-legacy`](./apps/flowgraph-legacy/README.md). New application code must not import implementation details directly from the legacy editor; reusable behavior should be extracted behind explicit schemas, contracts, or packages.
 
-The repository also contains a development application composed of:
+## Repository layout
 
-- `frontend`: Next.js application at http://localhost:3000
-- `api`: FastAPI job API and docs at http://localhost:8000/docs
-- `flowgraph`: this editor at http://localhost:8182
-- `runner`: an isolated Kratos worker based on the configured Kratos image
+```text
+apps/
+├── frontend/          Next.js application and shared design system
+├── api/               FastAPI control plane and workflow worker
+├── runner/            Transitional shared-volume Kratos worker
+└── flowgraph-legacy/  Original Flowgraph editor, kept for migration
+compose.yaml           Docker Desktop development environment
+```
 
-Copy the example environment and start the stack:
+## Start the development environment
+
+Docker Desktop with Docker Compose is the supported local setup.
 
 ```console
 cp .env.example .env
 docker compose up --build
 ```
 
-On Apple Silicon the Kratos CI image runs through Docker's amd64 emulation. Override
-`KRATOS_PLATFORM` in `.env` if a native image becomes available.
+Services:
 
-The requested `kratos-image-ci-ubuntu-22-04` image contains Kratos build tools and
-third-party libraries, but not the compiled `KratosMultiphysics` Python module. The
-runner therefore installs the official `KratosMultiphysics[all]` wheel set at build time.
-Pin another release with `KRATOS_VERSION`, or set `KRATOS_PYTHONPATH` when adapting
-the runner to a bind-mounted source build.
-
-The API and runner communicate through the `simulations` volume. `POST /api/runs`
-atomically creates a job containing `ProjectParameters.json` and `MainKratos.py`;
-the runner claims queued jobs, captures `runner.log`, and updates `status.json`.
-The default job is an import smoke test. A real application should send its own
-Kratos entrypoint in the `main_script` field.
+| Service | Default endpoint or role |
+|---|---|
+| Frontend | <http://localhost:3000> |
+| Design-system catalog | <http://localhost:3000/design-system> |
+| FastAPI documentation | <http://localhost:8000/docs> |
+| Legacy Flowgraph editor | <http://localhost:8182> |
+| Temporal Web UI | <http://localhost:8233> |
+| Temporal gRPC | `localhost:7233` |
+| Redis | `localhost:6379` |
+| Temporal workflow worker | Internal worker polling the configured Temporal task queue |
+| Kratos runner | Transitional worker polling the shared jobs volume |
 
 Useful commands:
 
 ```console
-docker compose logs -f runner
-docker compose restart api runner
+docker compose ps
+docker compose logs -f frontend api flowgraph redis temporal workflow-worker runner
+docker compose restart frontend api flowgraph redis temporal workflow-worker runner
 docker compose down
-docker compose down -v  # also deletes development jobs and dependency volumes
 ```
 
-## Installation
-Install [node.js](https://nodejs.org/en/download/package-manager)
-
-Ej. Ubuntu
-```console
-sudo apt install nodejs npm
-``` 
-
-Clone this repo
+Before starting containers, validate local interpolation without exposing values:
 
 ```console
-git clone https://github.com/KratosMultiphysics/Flowgraph.git
+docker compose config --quiet
 ```
 
-Navigate into the Flowgraph directory and install packages
+`docker compose down -v` removes all named volumes, including Temporal history, installed frontend packages, the Next.js build cache, and simulation jobs. Use it only when a full local reset is intended.
+
+## Verify Temporal and Redis
+
+FastAPI exposes separate process liveness and dependency readiness endpoints:
 
 ```console
-cd Flowgraph
-npm install
-sudo npm install -g nodemon
+curl http://localhost:8000/health/live
+curl http://localhost:8000/health/ready
 ```
 
-## How to run
-
-For users use either
+Run the development probe to check the API, Temporal server, workflow worker, and Redis cache together:
 
 ```console
-npm run start 
+curl -X POST http://localhost:8000/api/v1/development/workflows/smoke
 ```
+
+The probe appears in the Temporal UI at <http://localhost:8233>. Redis is configured as an expiring, disposable cache with no persistence volume. Temporal development history is retained in the `temporal_data` volume.
+
+## Run only the legacy editor
+
+The legacy service keeps its existing Compose service name and port:
 
 ```console
-node app.js
+docker compose up --build flowgraph
 ```
 
-For developers
+To run it directly without Compose:
 
 ```console
-npm run devstart 
+cd apps/flowgraph-legacy
+npm ci
+NODE_ENV=docker npm run devstart
 ```
 
-## Configuration
+Bundled import examples are in [`apps/flowgraph-legacy/resources/examples`](./apps/flowgraph-legacy/resources/examples/).
 
-You can change the configuration file used by setting the `NODE_ENV` variable. For example
+## Frontend reference
 
-```console
-export NODE_ENV=debug
-```
+The frontend component inventory and usage rules live in [`apps/frontend/design-system`](./apps/frontend/design-system/README.md). The catalog route is a development reference, not a separate application.
 
-will use `confg/debug.json` configure file.
+## Development boundary
 
-<!-- ## Description 
+Treat `apps/flowgraph-legacy` as maintenance-only. Changes there should be limited to compatibility, migration fixtures, security, and keeping the reference editor launchable. New Flowgraph IR, validation, compilation, language-model integration, and product UI work belongs in the new application architecture.
 
-### Tree of node dependencies
+## License
 
-- Project Parameters: OK
-  - Solver: OK
-    - Assign materials to modelpart: WIP
-      - Parse Modelpart WIP
-      - Parse Materials WIP
-    - Linear solver: OK
-    - Time stepping WIP
-    - Formulation: OK
-  - List of processes: OK
-    - … processes per application … : OK - WIP 
-  - List of output processes: OK
-    -  … processes per application … : OK - WIP
-
-
-- Auxiliary modules
-  - Export cases files
-  - JSON Viewer
-
-### Description of the nodes
-#### Parse Materials:
-
- Lista de materiales. Que usar de nombres?
-Assign materials to modelpart
-Parse Modelpart file: MP settings
-Parse materials file: Materials settings, lista de materiales
-
-from MP settings creates list of materials as inputs.
-Materials are connected to submp
-
-
-#### Project parameters
-*Required inputs*
-
-solver
-processes input
-processes boundary conditions
-processes output
-
-*Optional inputs* (have sensitive defaults)
-problem name
-parallel type
-echo level
-start time
-end time
-
-*Output*: ProjectParameters object, that can be input for 
-“Export case files”: need to pass data to get materials and model file.
-“JSON Viewer”: actually, output is only json, so this is the only module available so far
-
-WIP:
-Project parameters module: reset input when connections change
-
-
-#### Solvers
-Solvers require data from other modules
-“Parse modelparts file”, which returns Model parts settings (a json block with info about the model file name and type), and a list of submodelparts classified as volumetric, skin and non-skin
-- Linear solvers
-- Time stepping: Module that generate time stepping schemes
-- Formulation: Module with options and setting for specific formulation of the solver
-- Fluid Solver
-*Required input*
-Model part settings
-Volume submodelpart
-Skin submodelpart
-Non-skin submodelparts
-Linear solvers
-Materials
-Time stepping
-Formulation
-
-Structural Mechanics solver
-*Time*
-Time Stepping
-    automatic_time_step: true / false
-    time_step: 0.1
-     "time_step_table": [
-        [ 0.00, 0.01 ],
-        [ 0.02, 0.01 ],
-        [ 0.03, 0.10 ],
-        [ 1.00, 0.10 ]
-       ]
-        }
-WIP: Implement internal logic. Particularly, the time step table. Find a function that processes time in Kratos.
-Formulation
-Available formulations: fractional step, monolithic
-Optional input:
-element
-orthogonal subscale
-dynamic tau
-Output:
-Formulation object, to be connected to Solver module
-Linear solvers
-Setting for the AMGCL linear solver
-
-*Optional parameters*
-Coarsening:
-Smoothing:
-Krylov:
-Processes
-KratosMultiphysics
-Fluid Dynamics Application
-Structural Mechanics Application
-Your Other Installed Application
-Output
--->
+See [LICENSE](./LICENSE).

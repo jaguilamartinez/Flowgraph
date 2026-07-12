@@ -42,7 +42,7 @@ const catalogOptions = [
   {
     value: "legacy_bc",
     label: "Legacy boundary condition",
-    description: "Unsupported in Kratos 10.x",
+    description: "Unavailable in the selected environment",
     disabled: true,
   },
 ];
@@ -54,13 +54,13 @@ export function FormsSection() {
     <Section
       id="forms"
       title="Forms"
-      description="Schema-driven editing: units as suffixes, required/optional markers, deterministic inline errors, monospace for technical values. FormField wires label, help, and error ids automatically."
+      description="Schema-driven editing uses explicit units, required and optional markers, inline validation errors, and monospace for technical values. FormField associates compatible controls with their label, hint, and error text."
     >
       <Grid>
         <Specimen label="Input — default, hint, error">
           <Stack>
             <FormField label="Node name" hint="Shown in the outline and diagnostics.">
-              <Input placeholder="e.g. Inlet support" />
+              <Input placeholder="Inlet support" />
             </FormField>
             <FormField
               label="Model part"
@@ -116,7 +116,7 @@ export function FormsSection() {
                 </SelectGroup>
               </Select>
             </FormField>
-            <FormField label="Environment" hint="Changing the environment re-runs compatibility checks.">
+            <FormField label="Environment" hint="Compatibility checks use the selected environment.">
               <Select placeholder="Kratos 10.4.3" disabled>
                 <SelectItem value="10.4.3">Kratos 10.4.3</SelectItem>
               </Select>
@@ -126,7 +126,7 @@ export function FormsSection() {
 
         <Specimen
           label="Combobox"
-          note="Filterable single select for large sets — the node catalog pattern. Matches titles and descriptions; disabled options stay visible with their reason."
+          note="Use a filterable single select for large option sets. Matching includes labels and descriptions; disabled options remain visible with an explanation."
         >
           <Stack>
             <FormField label="Add node" hint="Search by title, kind, or application.">
@@ -156,7 +156,7 @@ export function FormsSection() {
             </RadioGroup>
             <Switch
               label="Compact density"
-              description="Tighter rows and controls for large graphs."
+              description="Reduces row and control spacing for large graphs."
             />
           </Stack>
         </Specimen>

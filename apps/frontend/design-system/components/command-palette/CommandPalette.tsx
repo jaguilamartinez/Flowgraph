@@ -38,8 +38,8 @@ export interface CommandPaletteProps {
 }
 
 /**
- * Keyboard-first command palette. Disabled commands stay visible with
- * their reason so constraints are never hidden (product spec §7.4).
+ * Searchable command palette with arrow-key navigation. Disabled
+ * commands remain visible with their unavailable reason.
  */
 export function CommandPalette({
   open,

@@ -5,7 +5,7 @@ import styles from "./empty-state.module.css";
 export interface EmptyStateProps {
   icon?: ReactNode;
   title: ReactNode;
-  /** Answers: what belongs here, why is it empty. */
+  /** Explains what belongs in the area and why no content is present. */
   description?: ReactNode;
   /** The primary next action, plus optional secondary paths. */
   actions?: ReactNode;

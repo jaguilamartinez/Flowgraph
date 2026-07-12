@@ -99,7 +99,7 @@
   font-weight: var(--ds-weight-semibold);
 }
 
-/* StatusMessage — quiet inline status line (save state, validation). */
+/* StatusMessage — compact inline status line (save state, validation). */
 .statusMessage {
   display: inline-flex;
   align-items: center;

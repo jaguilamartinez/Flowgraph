@@ -81,7 +81,7 @@ export function OverlaysSection() {
     <Section
       id="overlays"
       title="Overlays"
-      description="Modal surfaces are reserved for genuinely blocking flows; routine editing stays in panels. Tooltips carry supplementary text only — constraints are shown in visible UI."
+      description="Use modal surfaces for blocking tasks; keep routine editing in panels. Tooltips provide supplementary text, while constraints remain visible in the interface."
     >
       <Grid>
         <Specimen label="Dialog">
@@ -92,7 +92,7 @@ export function OverlaysSection() {
               </DialogTrigger>
               <DialogContent
                 title="Rename project"
-                description="The project URL and existing revision links are not affected."
+                description="Enter the name shown in project lists and revision headers."
                 footer={
                   <>
                     <DialogClose asChild>
@@ -205,7 +205,7 @@ export function OverlaysSection() {
 
         <Specimen
           label="CommandPalette"
-          note="Keyboard-first. Disabled commands stay listed with the reason they are unavailable."
+          note="Supports text filtering and arrow-key navigation. Disabled commands remain listed with the reason they are unavailable."
         >
           <Row>
             <Button

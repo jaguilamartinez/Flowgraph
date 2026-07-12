@@ -19,15 +19,15 @@ interface ReadinessResponse {
 const workflowSteps = [
   {
     number: "01",
-    title: "Describe the case",
+    title: "Specify the case",
     description:
-      "Capture the analysis intent, model assumptions, constraints, and target Kratos environment in plain engineering language.",
+      "Provide the analysis objective, model assumptions, constraints, and target Kratos environment.",
   },
   {
     number: "02",
     title: "Review proposed changes",
     description:
-      "Inspect each proposed node and parameter change in the graph before accepting it into the working draft.",
+      "Compare each proposed node and parameter change with the current graph before adding it to the working draft.",
   },
   {
     number: "03",
@@ -169,15 +169,15 @@ export default function Home() {
 
         <section className={styles.hero} aria-labelledby="page-title">
           <p className={styles.eyebrow}>Product direction</p>
-          <h1 id="page-title">From engineering intent to a reviewable simulation graph.</h1>
+          <h1 id="page-title">Create and review Kratos configurations in Flowgraph.</h1>
           <p className={styles.lede}>
-            Flowgraph AI is being built to create Kratos configuration files through
-            guided conversation. Proposed changes remain visible in Flowgraph and pass
-            deterministic checks before they become runnable artifacts.
+            Flowgraph AI is in development as a workspace where a language model proposes
+            Flowgraph changes from engineering requirements. Users review the graph, and
+            deterministic validation runs before Kratos configuration files are generated.
           </p>
           <div className={styles.heroActions}>
             <a className={styles.primaryLink} href="/design-system">
-              View the interface system
+              Open component catalog
               <ArrowRight size={15} aria-hidden />
             </a>
             <a
@@ -197,11 +197,13 @@ export default function Home() {
           <div className={styles.sectionIntroduction}>
             <p className={styles.sectionLabel}>Planned workflow</p>
             <div>
-              <h2 id="workflow-title">Conversation proposes. The graph stays authoritative.</h2>
+              <h2 id="workflow-title">
+                Model output remains a proposal until it is applied to the graph.
+              </h2>
               <p>
-                The product separates probabilistic assistance from deterministic engineering
-                checks. Nothing is accepted, generated, or executed without an explicit state
-                transition.
+                The planned workflow separates model inference from deterministic engineering
+                checks. Each proposal must be accepted before it can alter the graph, produce
+                artifacts, or start a simulation.
               </p>
             </div>
           </div>
@@ -222,8 +224,8 @@ export default function Home() {
             <div>
               <h2 id="environment-title">Local services</h2>
               <p>
-                Live status from the Docker Compose stack. These tools support development;
-                they are not the finished product workspace.
+                Status checks from the local Docker Compose stack. These services support
+                development and are separate from the planned product workspace.
               </p>
             </div>
           </div>
@@ -252,14 +254,14 @@ export default function Home() {
                 state={temporalState}
                 href={temporalUiUrl}
               />
-              <ServiceRow name="Redis" address="internal" state={redisState} />
+              <ServiceRow name="Redis" address="localhost:6379" state={redisState} />
               <ServiceRow name="Kratos runtime" address="internal" state={runnerState} />
             </section>
 
             <section className={styles.checkPanel} aria-labelledby="check-title">
               <div className={styles.panelHeading}>
                 <h3 id="check-title">Kratos runtime check</h3>
-                <span>10.4.3</span>
+                <span>Configured runner</span>
               </div>
               <p>
                 Submit a minimal local job to verify the API, shared job volume, runner,
@@ -286,7 +288,7 @@ export default function Home() {
 
         <footer className={styles.footer}>
           <span>Flowgraph AI</span>
-          <span>Engineering workspace · local stack</span>
+          <span>Frontend shell · local stack</span>
         </footer>
       </div>
     </main>

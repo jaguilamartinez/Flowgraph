@@ -12,7 +12,7 @@ export interface LinkProps extends ComponentPropsWithRef<"a"> {
    * Use to wrap framework links, e.g. `<Link asChild><NextLink …/></Link>`.
    */
   asChild?: boolean;
-  /** Opens in a new tab with a marker icon and safe rel. */
+  /** Opens in a new tab with a marker icon and `rel="noreferrer"`. */
   external?: boolean;
   /** De-emphasized link that inherits text color. */
   quiet?: boolean;

@@ -29,12 +29,12 @@ export function LayoutSection() {
     <Section
       id="layout"
       title="Workspace layout"
-      description="Docks are resizable, collapsible, and keyboard-operable. The SplitView separator is a real role=separator: drag it, or focus it and use the arrow keys — dragging is never required (WCAG 2.2)."
+      description="Docks are resizable, collapsible, and keyboard-operable. The SplitView handle supports pointer input and the Arrow, Home, and End keys."
     >
       <Grid wide>
         <Specimen
           label="SplitView"
-          note="Left dock (240–520 px) beside the graph canvas. Double-click the separator to reset. Sizes persist per user, never inside graph data."
+          note="Left dock (200–420 px) beside the graph canvas. Double-click the separator to reset. Store size preferences in user settings rather than graph data."
         >
           <div className={styles.splitDemo}>
             <SplitView

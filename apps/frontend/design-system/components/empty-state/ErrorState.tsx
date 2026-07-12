@@ -15,7 +15,7 @@ export interface ErrorStateProps {
   className?: string;
 }
 
-/** Full-area failure state with a recovery path. Never a dead end. */
+/** Full-area failure state with optional recovery actions. */
 export function ErrorState({
   title,
   description,

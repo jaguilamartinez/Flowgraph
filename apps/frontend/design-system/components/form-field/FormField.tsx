@@ -53,9 +53,8 @@ export interface FormFieldProps {
 
 /**
  * Groups Label, control, HelpText, and ErrorText and wires their
- * id/aria relationships. The single child control picks the wiring up
- * automatically when it calls `useFormField()` (all design-system
- * inputs do).
+ * id and ARIA relationships. A compatible child control consumes the
+ * field context by calling `useFormField()`.
  */
 export function FormField({
   label,

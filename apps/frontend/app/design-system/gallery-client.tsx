@@ -151,9 +151,9 @@ export function GalleryClient() {
               <div className={styles.intro}>
                 <h1 className={styles.introTitle}>Interface foundations and component catalog</h1>
                 <p className={styles.introText}>
-                  This catalog documents tokens, component behavior, content patterns, and
-                  accessibility states for the Flowgraph AI workspace. Product-specific
-                  interfaces build on these foundations inside their feature modules.
+                  This catalog documents the tokens, component behavior, content patterns,
+                  and accessibility states implemented in the frontend package. Feature
+                  modules compose the public primitives shown here.
                 </p>
               </div>
 

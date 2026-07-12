@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s · Flowgraph AI",
   },
   description:
-    "A workspace for creating reviewable, validated Kratos simulation configurations.",
+    "Frontend shell and design-system reference for a Kratos configuration workspace in development.",
 };
 
 /**

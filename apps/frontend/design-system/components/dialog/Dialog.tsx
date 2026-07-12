@@ -8,9 +8,9 @@ import { IconButton } from "../button/IconButton";
 import styles from "./dialog.module.css";
 
 /**
- * Modal dialog. Reserved for flows that genuinely block — confirmation
- * of destructive actions, required setup input. Routine editing stays
- * in panels to preserve spatial context (product spec §7.2).
+ * Modal dialog for blocking tasks such as destructive confirmation or
+ * required setup input. Routine editing remains in panels to preserve
+ * spatial context.
  */
 export const Dialog = RadixDialog.Root;
 export const DialogTrigger = RadixDialog.Trigger;

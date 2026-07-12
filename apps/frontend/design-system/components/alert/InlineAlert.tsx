@@ -13,8 +13,8 @@ export interface InlineAlertProps {
 }
 
 /**
- * Persistent contextual message. Error content follows the content
- * spec: what happened, what is affected, what the user can do.
+ * Persistent contextual message. Error copy states what happened, what
+ * is affected, and what the user can do next.
  */
 export function InlineAlert({
   status = "info",

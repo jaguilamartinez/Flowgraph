@@ -15,7 +15,7 @@ export interface NumberFieldProps
 
 /**
  * Numeric input with stepper buttons. Arrow keys step natively; the
- * buttons provide a pointer alternative and fire a change event.
+ * buttons provide a pointer alternative and dispatch an input event.
  */
 export function NumberField({
   unit,

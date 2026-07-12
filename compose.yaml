@@ -1,14 +1,66 @@
 name: flowgraph-dev
 
 services:
+  redis:
+    image: ${REDIS_IMAGE:-redis:8.2.7-alpine}
+    command:
+      - redis-server
+      - --save
+      - ""
+      - --appendonly
+      - "no"
+      - --maxmemory
+      - ${REDIS_MAXMEMORY:-256mb}
+      - --maxmemory-policy
+      - allkeys-lru
+    ports:
+      - "127.0.0.1:${REDIS_PORT:-6379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+    restart: unless-stopped
+
+  temporal:
+    # Local development server pinned by digest for reproducible startup. This
+    # mode does not provide production authentication, availability, or storage.
+    image: ${TEMPORAL_IMAGE:-temporalio/temporal@sha256:2c344b4a39b4489fc6944db095f628f0c30659836faf11780a4dc435599e80e3}
+    command:
+      - server
+      - start-dev
+      - --ip
+      - 0.0.0.0
+      - --db-filename
+      - /home/temporal/temporal.db
+      - --namespace
+      - ${TEMPORAL_NAMESPACE:-flowgraph-ai}
+      - --ui-disable-news-fetch
+    ports:
+      - "127.0.0.1:${TEMPORAL_PORT:-7233}:7233"
+      - "127.0.0.1:${TEMPORAL_UI_PORT:-8233}:8233"
+    volumes:
+      - temporal_data:/home/temporal
+    healthcheck:
+      test: ["CMD", "temporal", "operator", "cluster", "health", "--address", "127.0.0.1:7233"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+    restart: unless-stopped
+
   frontend:
     build:
       context: ./apps/frontend
       target: development
-    command: npm run dev
+    # The named node_modules volume survives image rebuilds. Reconcile it when
+    # package.json changes so newly installed dependencies are immediately usable.
+    command: sh -c "npm ls --depth=0 --silent || npm ci; exec npm run dev"
     environment:
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
       NEXT_PUBLIC_FLOWGRAPH_URL: ${NEXT_PUBLIC_FLOWGRAPH_URL:-http://localhost:8182}
+      NEXT_PUBLIC_TEMPORAL_UI_URL: ${NEXT_PUBLIC_TEMPORAL_UI_URL:-http://localhost:8233}
       WATCHPACK_POLLING: "true"
     ports:
       - "3000:3000"
@@ -21,38 +73,87 @@ services:
         condition: service_healthy
 
   api:
+    image: ${API_IMAGE:-flowgraph-ai-api:development}
     build:
       context: ./apps/api
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     environment:
       FLOWGRAPH_URL: http://flowgraph:8182
       JOBS_ROOT: /workspace/jobs
+      APP_ENVIRONMENT: ${APP_ENVIRONMENT:-development}
+      ENABLE_DEVELOPMENT_ENDPOINTS: ${ENABLE_DEVELOPMENT_ENDPOINTS:-true}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      REDIS_KEY_PREFIX: ${REDIS_KEY_PREFIX:-flowgraph:dev}
+      REDIS_CONNECT_TIMEOUT_SECONDS: ${REDIS_CONNECT_TIMEOUT_SECONDS:-1}
+      REDIS_OPERATION_TIMEOUT_SECONDS: ${REDIS_OPERATION_TIMEOUT_SECONDS:-2}
+      REDIS_MAX_CONNECTIONS: ${REDIS_MAX_CONNECTIONS:-20}
+      REDIS_DEFAULT_TTL_SECONDS: ${REDIS_DEFAULT_TTL_SECONDS:-300}
+      TEMPORAL_ADDRESS: ${TEMPORAL_ADDRESS:-temporal:7233}
+      TEMPORAL_NAMESPACE: ${TEMPORAL_NAMESPACE:-flowgraph-ai}
+      TEMPORAL_TASK_QUEUE: ${TEMPORAL_TASK_QUEUE:-platform-workflows}
+      TEMPORAL_CONNECT_TIMEOUT_SECONDS: ${TEMPORAL_CONNECT_TIMEOUT_SECONDS:-5}
+      DEPENDENCY_HEALTH_TIMEOUT_SECONDS: ${DEPENDENCY_HEALTH_TIMEOUT_SECONDS:-2}
     ports:
       - "8000:8000"
     volumes:
       - ./apps/api:/app
       - simulations:/workspace/jobs
+    depends_on:
+      redis:
+        condition: service_healthy
+      temporal:
+        condition: service_healthy
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/ready')"]
       interval: 5s
       timeout: 3s
       retries: 10
 
+  workflow-worker:
+    image: ${WORKFLOW_WORKER_IMAGE:-flowgraph-ai-workflow-worker:development}
+    build:
+      context: ./apps/api
+    command: python -m app.orchestration.worker
+    environment:
+      APP_ENVIRONMENT: ${APP_ENVIRONMENT:-development}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      REDIS_KEY_PREFIX: ${REDIS_KEY_PREFIX:-flowgraph:dev}
+      REDIS_CONNECT_TIMEOUT_SECONDS: ${REDIS_CONNECT_TIMEOUT_SECONDS:-1}
+      REDIS_OPERATION_TIMEOUT_SECONDS: ${REDIS_OPERATION_TIMEOUT_SECONDS:-2}
+      REDIS_MAX_CONNECTIONS: ${REDIS_MAX_CONNECTIONS:-20}
+      REDIS_DEFAULT_TTL_SECONDS: ${REDIS_DEFAULT_TTL_SECONDS:-300}
+      TEMPORAL_ADDRESS: ${TEMPORAL_ADDRESS:-temporal:7233}
+      TEMPORAL_NAMESPACE: ${TEMPORAL_NAMESPACE:-flowgraph-ai}
+      TEMPORAL_TASK_QUEUE: ${TEMPORAL_TASK_QUEUE:-platform-workflows}
+      TEMPORAL_CONNECT_TIMEOUT_SECONDS: ${TEMPORAL_CONNECT_TIMEOUT_SECONDS:-5}
+      DEPENDENCY_HEALTH_TIMEOUT_SECONDS: ${DEPENDENCY_HEALTH_TIMEOUT_SECONDS:-2}
+    volumes:
+      - ./apps/api:/app
+    depends_on:
+      redis:
+        condition: service_healthy
+      temporal:
+        condition: service_healthy
+    init: true
+    restart: unless-stopped
+
   flowgraph:
     build:
-      context: .
-      dockerfile: docker/flowgraph.Dockerfile
+      context: ./apps/flowgraph-legacy
+      dockerfile: Dockerfile
     command: sh -c "test -x node_modules/.bin/nodemon || npm ci; exec npm run devstart"
     environment:
       NODE_ENV: docker
     ports:
       - "8182:8182"
     volumes:
-      - .:/app
+      - ./apps/flowgraph-legacy:/app
       - flowgraph_node_modules:/app/node_modules
       - simulations:/workspace/jobs
 
   runner:
+    # Development-only runner. It executes API-supplied Python in a shared jobs
+    # volume and must not be exposed to untrusted clients.
     build:
       context: ./apps/runner
       args:
@@ -70,6 +171,7 @@ services:
     restart: unless-stopped
 
 volumes:
+  temporal_data:
   flowgraph_node_modules:
   frontend_node_modules:
   frontend_next:

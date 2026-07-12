@@ -44,7 +44,7 @@
   width: 1px;
   cursor: col-resize;
 }
-/* Widened invisible hit area so the 1 px divider stays precise to drag. */
+/* Expand the pointer target without changing the visible 1 px divider. */
 .separatorHorizontal::before {
   content: "";
   position: absolute;

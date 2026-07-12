@@ -9,8 +9,8 @@ export interface TableProps extends ComponentPropsWithRef<"table"> {
 
 /**
  * Data table for comparison and filtering (simulations, revisions,
- * artifacts). Horizontal overflow scrolls inside the table's own
- * container; the page never scrolls sideways.
+ * artifacts). The wrapper contains horizontal overflow instead of
+ * extending the page width.
  */
 export function Table({ interactive, className, ...props }: TableProps) {
   return (

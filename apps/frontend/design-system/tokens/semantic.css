@@ -76,7 +76,7 @@
   --ds-status-danger-surface: var(--ds-red-50);
   --ds-status-danger-border: var(--ds-red-200);
 
-  /* Status — assistant proposal (unapplied AI-originated changes only) */
+  /* Status — unapplied model-generated proposal */
   --ds-status-proposal-text: var(--ds-purple-700);
   --ds-status-proposal-icon: var(--ds-purple-600);
   --ds-status-proposal-surface: var(--ds-purple-50);
@@ -174,7 +174,7 @@
   --ds-status-danger-surface: #3a1512;
   --ds-status-danger-border: var(--ds-red-800);
 
-  /* Status — assistant proposal */
+  /* Status — unapplied model-generated proposal */
   --ds-status-proposal-text: var(--ds-purple-300);
   --ds-status-proposal-icon: var(--ds-purple-400);
   --ds-status-proposal-surface: #262038;

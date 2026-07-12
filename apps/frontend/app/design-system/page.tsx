@@ -3,8 +3,7 @@ import { GalleryClient } from "./gallery-client";
 
 export const metadata: Metadata = {
   title: "Design system",
-  description:
-    "Component catalog and token reference for the Flowgraph AI design system.",
+  description: "Reference for Flowgraph AI frontend design tokens and components.",
 };
 
 export default function DesignSystemPage() {

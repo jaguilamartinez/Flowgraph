@@ -24,7 +24,7 @@ export interface SplitViewProps {
   maxSize?: number;
   /** Accessible name for the resize handle, e.g. `Resize left dock`. */
   separatorLabel: string;
-  /** Notified on resize; persist per user/project outside graph data. */
+  /** Called after resize; consumers can persist the value outside graph data. */
   onSizeChange?: (size: number) => void;
   className?: string;
 }
@@ -34,7 +34,7 @@ const KEYBOARD_STEP = 16;
 /**
  * Two-pane resizable layout for workspace docks. The separator is a
  * keyboard-operable `role="separator"`: arrow keys resize, Home/End
- * jump to the limits — dragging is never required.
+ * select the minimum or maximum, and pointer dragging is optional.
  */
 export function SplitView({
   pane,

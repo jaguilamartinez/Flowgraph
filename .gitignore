@@ -1,8 +1,40 @@
+# Local configuration. Commit the documented template only.
 .env
-.next/
-node_modules/
-__pycache__/
+.env.*
+!.env.example
+
+# JavaScript and Next.js build output.
+**/node_modules/
+**/.next/
+**/next-env.d.ts
+**/out/
+**/dist/
+**/coverage/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Python environments, caches, and coverage output.
+**/__pycache__/
+*.py[cod]
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
 .venv/
+
+# Local runtime state.
 simulations/
-*.pyc
+*.log
+
+# Local planning and architecture documents.
+/docs/
+
+# Workstation metadata.
+.DS_Store
+.idea/
+.vscode/

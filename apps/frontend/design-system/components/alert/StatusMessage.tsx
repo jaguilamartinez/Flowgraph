@@ -14,14 +14,14 @@ export interface StatusMessageProps {
   /**
    * Announce updates to assistive technology. Use for state that changes
    * in place (save state, validation), per WCAG 4.1.3. Announcements are
-   * polite; they never steal focus.
+   * polite live-region updates and do not move focus.
    */
   announce?: boolean;
   className?: string;
 }
 
 /**
- * Quiet inline status line: `Saved`, `Saving…`, `Validation out of date`.
+ * Compact inline status line: `Saved`, `Saving…`, `Validation out of date`.
  * Independent state dimensions stay separate — render one StatusMessage
  * per dimension rather than collapsing readiness into one indicator.
  */

@@ -14,19 +14,19 @@ const surfaceTokens = [
 const accentTokens = [
   ["--ds-action-primary", "Brand and primary action"],
   ["--ds-focus-ring", "Keyboard focus and graph selection"],
-  ["--ds-status-proposal-icon", "Unapplied assistant proposals only"],
+  ["--ds-status-proposal-icon", "Unapplied model-generated proposals"],
   ["--ds-status-success-icon", "Deterministically verified success"],
   ["--ds-status-warning-icon", "Needs attention"],
   ["--ds-status-danger-icon", "Error, failure, destructive action"],
 ] as const;
 
 const statuses: Array<{ status: Status; usage: string }> = [
-  { status: "neutral", usage: "Idle, not checked, informative metadata" },
-  { status: "info", usage: "System relationships and progress" },
+  { status: "neutral", usage: "Idle, not checked, or unverified" },
+  { status: "info", usage: "Informational state or work in progress" },
   { status: "success", usage: "Verified success only" },
   { status: "warning", usage: "Valid but requires attention" },
   { status: "danger", usage: "Errors and destructive actions only" },
-  { status: "proposal", usage: "Unapplied assistant-originated changes" },
+  { status: "proposal", usage: "Unapplied model-generated changes" },
 ];
 
 const spaceSteps = [
@@ -65,7 +65,10 @@ export function FoundationsSection() {
           </div>
         </Specimen>
 
-        <Specimen label="Accents" note="One meaning per hue. Red is never decoration.">
+        <Specimen
+          label="Accents"
+          note="Each accent has a documented role. Red is reserved for errors and destructive actions."
+        >
           <div className={styles.swatchList}>
             {accentTokens.map(([token, role]) => (
               <div key={token} className={styles.swatchRow}>
@@ -79,7 +82,7 @@ export function FoundationsSection() {
 
         <Specimen
           label="Status system"
-          note="Status always combines text, an icon or shape, and color as reinforcement — never color alone."
+          note="Status combines text, an icon or shape, and color so that color is not the only cue."
         >
           <div style={{ display: "flex", flexDirection: "column", gap: "var(--ds-space-2)" }}>
             {statuses.map(({ status, usage }) => (
@@ -103,7 +106,7 @@ export function FoundationsSection() {
 
         <Specimen
           label="Typography"
-          note="Two functional stacks. Monospace is for identifiers, values, logs, and units — never an aesthetic."
+          note="Use monospace for identifiers, values, logs, and units. Interface copy uses the proportional sans-serif stack."
         >
           <div className={styles.typeSample}>
             <div className={styles.typeRow}>
@@ -151,7 +154,7 @@ export function FoundationsSection() {
 
         <Specimen
           label="Radii and elevation"
-          note="Small, consistent radii. Elevation is reserved for overlays, menus, dialogs, and dragged items."
+          note="Use the three radius tokens. Shadows are limited to overlays, menus, dialogs, and dragged items."
         >
           <Row>
             <span className={styles.radiusChip} style={{ borderRadius: "var(--ds-radius-sm)" }}>

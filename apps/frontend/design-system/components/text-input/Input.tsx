@@ -6,7 +6,7 @@ import { useFormField } from "../form-field/FormField";
 import styles from "./input.module.css";
 
 export interface InputProps extends ComponentPropsWithRef<"input"> {
-  /** Marks the control invalid. Set automatically inside a FormField with an error. */
+  /** Marks the control invalid. FormField supplies this state through context. */
   invalid?: boolean;
   /** Monospace with tabular numerals — for identifiers and technical values. */
   mono?: boolean;

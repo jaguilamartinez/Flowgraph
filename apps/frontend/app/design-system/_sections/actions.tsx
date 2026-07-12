@@ -9,7 +9,7 @@ export function ActionsSection() {
     <Section
       id="actions"
       title="Actions"
-      description="Verb-first labels from the product vocabulary: Apply proposal, Generate configuration, Run simulation. One primary action per view; red is reserved for destruction."
+      description="Use verb-first labels from the product vocabulary: Apply proposal, Generate configuration, Run simulation. Limit each view to one primary action; danger styling is reserved for destructive commands."
     >
       <Grid>
         <Specimen label="Button — variants">
@@ -37,7 +37,7 @@ export function ActionsSection() {
 
         <Specimen
           label="Button — loading and disabled"
-          note="Loading buttons stay in place, announce aria-busy, and never animate under reduced motion."
+          note="Loading buttons retain their dimensions and set aria-busy. Spinner animation is disabled when reduced motion is requested."
         >
           <Row>
             <Button variant="primary" loading>

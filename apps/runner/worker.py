@@ -40,7 +40,7 @@ def run(job_dir: Path, status: dict) -> None:
 
 def main() -> None:
     JOBS_ROOT.mkdir(parents=True, exist_ok=True)
-    print(f"Watching {JOBS_ROOT} for Kratos jobs", flush=True)
+    print(f"Kratos runner started jobs_root={JOBS_ROOT}", flush=True)
     while True:
         for status_file in sorted(JOBS_ROOT.glob("*/status.json")):
             try:
@@ -48,7 +48,12 @@ def main() -> None:
                 if status.get("state") == "queued":
                     run(status_file.parent, status)
             except Exception as error:
-                print(f"Could not process {status_file}: {error}", flush=True)
+                print(
+                    "Kratos job processing failed "
+                    f"status_file={status_file} "
+                    f"error_type={type(error).__name__} error={error}",
+                    flush=True,
+                )
         time.sleep(POLL_SECONDS)
 
 

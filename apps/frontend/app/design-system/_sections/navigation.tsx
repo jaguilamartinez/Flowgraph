@@ -34,7 +34,7 @@ export function NavigationSection() {
       description="Docks use tabs; inspectors group fields by user task with disclosure for advanced content. Toolbars are a single tab stop with arrow-key navigation."
     >
       <Grid>
-        <Specimen label="Tabs" note="Counts surface diagnostics without opening the panel.">
+        <Specimen label="Tabs" note="Tab counts expose diagnostic totals before the panel opens.">
           <Tabs defaultValue="problems">
             <TabsList aria-label="Bottom dock panels">
               <TabsTrigger value="problems" count={3}>
@@ -65,7 +65,7 @@ export function NavigationSection() {
           </Tabs>
         </Specimen>
 
-        <Specimen label="Accordion" note="Inspector fields grouped by task, not raw object order.">
+        <Specimen label="Accordion" note="Group inspector fields by task rather than source-object order.">
           <Accordion type="multiple" defaultValue={["time"]}>
             <AccordionItem value="time" title="Time settings">
               <p style={{ margin: 0, color: "var(--ds-text-secondary)" }}>
@@ -85,7 +85,7 @@ export function NavigationSection() {
 
         <Specimen
           label="Collapsible"
-          note="Raw JSON sits behind an explicit advanced view and passes the same validation."
+          note="Raw JSON is shown in an explicit advanced view and uses the same validation path."
         >
           <Collapsible label="Advanced: raw parameters">
             <pre className={styles.monoBlock}>

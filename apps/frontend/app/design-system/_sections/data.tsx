@@ -65,7 +65,7 @@ const simulations = [
     revision: "rev-0013",
     environment: "Kratos 10.4.3",
     duration: "—",
-    started: "Today 14:02",
+    started: "11 Jul 14:02",
     author: "J. Águila",
   },
   {
@@ -74,7 +74,7 @@ const simulations = [
     revision: "rev-0012",
     environment: "Kratos 10.4.3",
     duration: "4 m 12 s",
-    started: "Today 11:30",
+    started: "11 Jul 11:30",
     author: "J. Águila",
   },
   {
@@ -83,7 +83,7 @@ const simulations = [
     revision: "rev-0012",
     environment: "Kratos 10.3.0",
     duration: "0 m 41 s",
-    started: "Yesterday 17:26",
+    started: "10 Jul 17:26",
     author: "M. Rivera",
   },
   {
@@ -112,7 +112,7 @@ export function DataSection() {
     <Section
       id="data"
       title="Data"
-      description="Tables optimize comparison: monospace tabular numerals, uppercase column labels, selection with a visible edge — not color alone. The tree is the synchronized graph outline, fully keyboard-operable."
+      description="Tables support comparison with tabular numerals, consistent column labels, and selection indicated by both color and a visible edge. The graph outline supports arrow-key navigation and selection."
     >
       <Grid>
         <Specimen

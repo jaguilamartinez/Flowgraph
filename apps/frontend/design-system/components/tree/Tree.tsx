@@ -51,8 +51,7 @@ const statusMetaClass: Record<Status, string> = {
 
 /**
  * Accessible tree view (WAI-ARIA tree pattern with roving tabindex).
- * Serves the synchronized graph outline: not an accessibility fallback,
- * but a productive view for large graphs.
+ * Provides a keyboard-navigable outline for graph structures.
  */
 export function Tree({
   "aria-label": ariaLabel,

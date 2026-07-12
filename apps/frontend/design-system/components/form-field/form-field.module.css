@@ -1,0 +1,49 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-field-gap);
+}
+
+.label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--ds-space-1);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-md);
+  font-weight: var(--ds-weight-medium);
+  line-height: var(--ds-leading-normal);
+}
+
+.optional {
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-regular);
+}
+
+.requiredMark {
+  color: var(--ds-status-danger-icon);
+}
+
+.helpText {
+  margin: 0;
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-normal);
+}
+
+.errorText {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-1);
+  margin: 0;
+  color: var(--ds-status-danger-text);
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-normal);
+}
+
+.errorIcon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--ds-status-danger-icon);
+}

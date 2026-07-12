@@ -1,0 +1,131 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ds-z-overlay);
+  background: var(--ds-scrim);
+}
+
+.content {
+  position: fixed;
+  top: 12vh;
+  left: 50%;
+  z-index: var(--ds-z-overlay);
+  display: flex;
+  flex-direction: column;
+  width: min(560px, calc(100vw - var(--ds-space-8)));
+  max-height: 60vh;
+  transform: translateX(-50%);
+  background: var(--ds-surface-raised);
+  border: 1px solid var(--ds-border-default);
+  border-radius: var(--ds-radius-lg);
+  box-shadow: var(--ds-shadow-dialog);
+  overflow: hidden;
+}
+.content:focus {
+  outline: none;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: 0 var(--ds-space-3);
+  border-bottom: 1px solid var(--ds-border-default);
+}
+
+.searchIcon {
+  flex: none;
+  color: var(--ds-text-muted);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: var(--ds-control-height);
+  background: transparent;
+  border: 0;
+  color: var(--ds-text-primary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-lg);
+}
+.input::placeholder {
+  color: var(--ds-text-muted);
+}
+.input:focus {
+  outline: none;
+}
+
+.list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  margin: 0;
+  padding: var(--ds-space-1);
+  list-style: none;
+}
+
+.sectionLabel {
+  padding: var(--ds-space-2) var(--ds-space-2) var(--ds-space-1);
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+}
+
+.command {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  min-height: var(--ds-control-height-sm);
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-text-primary);
+  font-size: var(--ds-text-md);
+  cursor: pointer;
+}
+.commandActive {
+  background: var(--ds-action-secondary-hover);
+}
+.commandDisabled {
+  color: var(--ds-text-muted);
+  cursor: not-allowed;
+}
+
+.commandIcon {
+  display: inline-flex;
+  flex: none;
+  width: 16px;
+  color: var(--ds-text-secondary);
+}
+.commandDisabled .commandIcon {
+  color: var(--ds-text-muted);
+}
+
+.commandLabel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.disabledReason {
+  flex: none;
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-sm);
+}
+
+.shortcut {
+  flex: none;
+  color: var(--ds-text-muted);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-xs);
+}
+
+.empty {
+  padding: var(--ds-space-6);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-text-md);
+  text-align: center;
+}

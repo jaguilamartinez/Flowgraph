@@ -1,0 +1,110 @@
+.viewport {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: var(--ds-z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  width: 360px;
+  max-width: 100vw;
+  padding: var(--ds-space-4);
+  margin: 0;
+  list-style: none;
+  outline: none;
+}
+
+.toast {
+  display: flex;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-3);
+  background: var(--ds-surface-overlay);
+  border: 1px solid var(--ds-border-default);
+  border-radius: var(--ds-radius-md);
+  box-shadow: var(--ds-shadow-overlay);
+}
+
+.toast[data-state="open"] {
+  animation: ds-toast-in var(--ds-duration-medium) var(--ds-ease);
+}
+.toast[data-state="closed"] {
+  animation: ds-toast-out var(--ds-duration-fast) var(--ds-ease);
+}
+.toast[data-swipe="move"] {
+  transform: translateX(var(--radix-toast-swipe-move-x));
+}
+.toast[data-swipe="end"] {
+  animation: ds-toast-out var(--ds-duration-fast) var(--ds-ease);
+}
+
+@keyframes ds-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ds-toast-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast[data-state="open"],
+  .toast[data-state="closed"],
+  .toast[data-swipe="end"] {
+    animation: none;
+  }
+}
+
+.icon {
+  flex: none;
+  margin-top: 1px;
+}
+.iconNeutral {
+  color: var(--ds-status-neutral-icon);
+}
+.iconInfo {
+  color: var(--ds-status-info-icon);
+}
+.iconSuccess {
+  color: var(--ds-status-success-icon);
+}
+.iconWarning {
+  color: var(--ds-status-warning-icon);
+}
+.iconDanger {
+  color: var(--ds-status-danger-icon);
+}
+.iconProposal {
+  color: var(--ds-status-proposal-icon);
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  color: var(--ds-text-primary);
+  font-size: var(--ds-text-md);
+  font-weight: var(--ds-weight-semibold);
+  line-height: var(--ds-leading-normal);
+}
+
+.description {
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-normal);
+}

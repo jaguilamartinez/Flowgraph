@@ -1,0 +1,31 @@
+.skeleton {
+  display: block;
+  background: var(--ds-surface-inset);
+  border-radius: var(--ds-radius-sm);
+  animation: ds-skeleton-pulse 1.6s ease-in-out infinite;
+}
+
+.text {
+  height: 1em;
+  border-radius: var(--ds-radius-sm);
+}
+
+.circle {
+  border-radius: var(--ds-radius-full);
+}
+
+@keyframes ds-skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}

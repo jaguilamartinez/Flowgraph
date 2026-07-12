@@ -1,0 +1,101 @@
+.tree {
+  margin: 0;
+  padding: var(--ds-space-1);
+  list-style: none;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-md);
+}
+
+.group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  min-height: calc(var(--ds-row-height) - 12px);
+  padding: 0 var(--ds-space-2);
+  padding-left: calc(var(--ds-space-2) + var(--tree-depth, 0) * var(--ds-space-4));
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-text-primary);
+  cursor: pointer;
+  user-select: none;
+}
+.row:hover {
+  background: var(--ds-action-secondary-hover);
+}
+.row:focus-visible {
+  outline: var(--ds-focus-ring-width) solid var(--ds-focus-ring);
+  outline-offset: -2px;
+}
+
+.rowSelected,
+.rowSelected:hover {
+  background: var(--ds-selection-surface);
+  box-shadow: inset 2px 0 0 var(--ds-selection);
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex: none;
+  color: var(--ds-text-secondary);
+  transition: transform var(--ds-duration-fast) var(--ds-ease);
+}
+.toggleExpanded {
+  transform: rotate(90deg);
+}
+.toggleSpacer {
+  width: 16px;
+  flex: none;
+}
+
+.itemIcon {
+  display: inline-flex;
+  flex: none;
+  color: var(--ds-text-secondary);
+}
+
+.label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  font-size: var(--ds-text-sm);
+}
+.metaWarning {
+  color: var(--ds-status-warning-text);
+}
+.metaDanger {
+  color: var(--ds-status-danger-text);
+}
+.metaProposal {
+  color: var(--ds-status-proposal-text);
+}
+.metaNeutral {
+  color: var(--ds-text-muted);
+}
+.metaSuccess {
+  color: var(--ds-status-success-text);
+}
+.metaInfo {
+  color: var(--ds-status-info-text);
+}

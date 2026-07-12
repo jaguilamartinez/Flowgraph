@@ -1,0 +1,166 @@
+/**
+ * Design-system primitive tokens.
+ *
+ * Raw scales only. Feature code must never read these directly —
+ * consume the semantic tokens in `semantic.css` instead.
+ * Anchors come from the reference palette in
+ * docs/product-design-specification.md §14.7.
+ */
+
+:root {
+  /* ── Color primitives ──────────────────────────────────────────── */
+
+  /* Warm neutral ramp */
+  --ds-neutral-0: #ffffff;
+  --ds-neutral-50: #fbfaf7;
+  --ds-neutral-100: #f5f4f0;
+  --ds-neutral-150: #eae9e3;
+  --ds-neutral-200: #d4d5ce;
+  --ds-neutral-300: #b4b6ac;
+  --ds-neutral-400: #90938a;
+  --ds-neutral-500: #70736a;
+  --ds-neutral-600: #555850;
+  --ds-neutral-700: #3f4139;
+  --ds-neutral-750: #33342f;
+  --ds-neutral-800: #2a2b28;
+  --ds-neutral-850: #222320;
+  --ds-neutral-900: #1b1c1a;
+  --ds-neutral-950: #141512;
+
+  /* Rust / oxide — brand and primary action */
+  --ds-rust-50: #fbede7;
+  --ds-rust-100: #f5d8cc;
+  --ds-rust-200: #e8b09c;
+  --ds-rust-300: #d98b6f;
+  --ds-rust-400: #c86a4c;
+  --ds-rust-500: #b45230;
+  --ds-rust-600: #a13f25;
+  --ds-rust-700: #86341f;
+  --ds-rust-800: #6b2a19;
+  --ds-rust-900: #4e1f13;
+
+  /* Blue — information, focus, selection */
+  --ds-blue-50: #eaf3fa;
+  --ds-blue-100: #d0e4f4;
+  --ds-blue-200: #a3c9e6;
+  --ds-blue-300: #74acd6;
+  --ds-blue-400: #4a90c4;
+  --ds-blue-500: #2678b3;
+  --ds-blue-600: #0b61a4;
+  --ds-blue-700: #0a5089;
+  --ds-blue-800: #08406d;
+  --ds-blue-900: #062f51;
+
+  /* Green — verified success only */
+  --ds-green-50: #e9f4ee;
+  --ds-green-100: #cde7da;
+  --ds-green-200: #9ccfb4;
+  --ds-green-300: #6db690;
+  --ds-green-400: #479e71;
+  --ds-green-500: #2f8459;
+  --ds-green-600: #1e6b43;
+  --ds-green-700: #195737;
+  --ds-green-800: #14452c;
+  --ds-green-900: #0e3120;
+
+  /* Amber — warnings and attention */
+  --ds-amber-50: #fbf3e2;
+  --ds-amber-100: #f5e3bd;
+  --ds-amber-200: #eac97e;
+  --ds-amber-300: #ddae47;
+  --ds-amber-400: #c89323;
+  --ds-amber-500: #a97710;
+  --ds-amber-600: #8c6105;
+  --ds-amber-700: #7a4f00;
+  --ds-amber-800: #5e3d00;
+  --ds-amber-900: #422b00;
+
+  /* Red — errors and destructive states only */
+  --ds-red-50: #fcecea;
+  --ds-red-100: #f8d4d0;
+  --ds-red-200: #efa9a1;
+  --ds-red-300: #e47d72;
+  --ds-red-400: #d65648;
+  --ds-red-500: #c53a2c;
+  --ds-red-600: #b42318;
+  --ds-red-700: #931d14;
+  --ds-red-800: #741710;
+  --ds-red-900: #53110c;
+
+  /* Purple — unapplied assistant proposals only */
+  --ds-purple-50: #f0edf8;
+  --ds-purple-100: #dfd8f0;
+  --ds-purple-200: #c0b3e0;
+  --ds-purple-300: #a190ce;
+  --ds-purple-400: #8672ba;
+  --ds-purple-500: #755faf;
+  --ds-purple-600: #6750a4;
+  --ds-purple-700: #55428a;
+  --ds-purple-800: #443570;
+  --ds-purple-900: #312651;
+
+  /* ── Typography primitives ─────────────────────────────────────── */
+
+  --ds-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --ds-font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  --ds-text-xs: 11px;
+  --ds-text-sm: 12px;
+  --ds-text-md: 13px; /* application base size */
+  --ds-text-lg: 14px;
+  --ds-text-xl: 16px;
+  --ds-text-2xl: 20px;
+  --ds-text-3xl: 24px;
+
+  --ds-leading-tight: 1.25;
+  --ds-leading-normal: 1.45;
+  --ds-leading-loose: 1.6;
+
+  --ds-weight-regular: 400;
+  --ds-weight-medium: 500;
+  --ds-weight-semibold: 600;
+
+  --ds-tracking-caps: 0.08em; /* uppercase kickers and column labels */
+
+  /* ── Spacing (4 px base scale) ─────────────────────────────────── */
+
+  --ds-space-0: 0;
+  --ds-space-1: 4px;
+  --ds-space-2: 8px;
+  --ds-space-3: 12px;
+  --ds-space-4: 16px;
+  --ds-space-5: 20px;
+  --ds-space-6: 24px;
+  --ds-space-8: 32px;
+  --ds-space-10: 40px;
+  --ds-space-12: 48px;
+  --ds-space-16: 64px;
+
+  /* ── Radii (small, consistent) ─────────────────────────────────── */
+
+  --ds-radius-sm: 3px;
+  --ds-radius-md: 5px;
+  --ds-radius-lg: 8px;
+  --ds-radius-full: 999px;
+
+  /* ── Motion ────────────────────────────────────────────────────── */
+
+  --ds-duration-fast: 120ms;
+  --ds-duration-medium: 180ms;
+  --ds-ease: cubic-bezier(0.2, 0.6, 0.3, 1);
+
+  /* ── Layering ──────────────────────────────────────────────────── */
+
+  --ds-z-dropdown: 50;
+  --ds-z-overlay: 100;
+  --ds-z-toast: 150;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ds-duration-fast: 0ms;
+    --ds-duration-medium: 0ms;
+  }
+}

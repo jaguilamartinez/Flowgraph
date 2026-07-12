@@ -1,0 +1,471 @@
+.page {
+  min-height: 100vh;
+  background: var(--ds-surface-canvas);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-md);
+  line-height: var(--ds-leading-normal);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  min-height: 52px;
+  padding: var(--ds-space-2) var(--ds-space-6);
+  background: var(--ds-surface-default);
+  border-bottom: 1px solid var(--ds-border-default);
+}
+
+.headerTitle {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-3);
+  flex: 1;
+  min-width: 0;
+}
+
+.wordmark {
+  color: var(--ds-text-primary);
+  font-size: var(--ds-text-lg);
+  font-weight: var(--ds-weight-semibold);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.wordmark:focus-visible {
+  outline: var(--ds-focus-ring-width) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-focus-ring-offset);
+}
+
+.headerMeta {
+  color: var(--ds-text-muted);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-xs);
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: var(--ds-space-10);
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: var(--ds-space-8) var(--ds-space-6) var(--ds-space-16);
+}
+
+.nav {
+  position: sticky;
+  top: calc(52px + var(--ds-space-8));
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.navKicker {
+  margin: 0 0 var(--ds-space-2);
+  color: var(--ds-action-primary);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-xs);
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+}
+
+.navLink {
+  padding: var(--ds-space-1) var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-text-md);
+  text-decoration: none;
+}
+.navLink:hover {
+  background: var(--ds-action-secondary-hover);
+  color: var(--ds-text-primary);
+}
+.navLink:focus-visible {
+  outline: var(--ds-focus-ring-width) solid var(--ds-focus-ring);
+  outline-offset: 1px;
+}
+
+.main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-12);
+}
+
+.intro {
+  max-width: 72ch;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+}
+
+.introTitle {
+  margin: 0;
+  font-size: var(--ds-text-3xl);
+  font-weight: var(--ds-weight-semibold);
+  letter-spacing: -0.02em;
+  line-height: var(--ds-leading-tight);
+}
+
+.introText {
+  margin: 0;
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-text-lg);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-5);
+  padding-top: var(--ds-space-8);
+  border-top: 1px solid var(--ds-border-default);
+  scroll-margin-top: calc(52px + var(--ds-space-4));
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: var(--ds-text-2xl);
+  font-weight: var(--ds-weight-semibold);
+  letter-spacing: -0.01em;
+}
+
+.sectionDescription {
+  max-width: 72ch;
+  margin: calc(-1 * var(--ds-space-3)) 0 0;
+  color: var(--ds-text-secondary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--ds-space-6) var(--ds-space-8);
+}
+
+.gridWide {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.specimen {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+}
+
+.specimenLabel {
+  padding-bottom: var(--ds-space-1);
+  border-bottom: 1px solid var(--ds-border-default);
+  color: var(--ds-text-muted);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-xs);
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+}
+
+.specimenNote {
+  margin: 0;
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-sm);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-3);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--ds-space-3);
+  max-width: 420px;
+}
+
+.stackWide {
+  max-width: none;
+}
+
+/* ── Foundations ──────────────────────────────────────────────────── */
+
+.swatchList {
+  display: flex;
+  flex-direction: column;
+}
+
+.swatchRow {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  gap: var(--ds-space-3);
+  align-items: center;
+  min-height: 36px;
+  border-top: 1px solid var(--ds-border-default);
+}
+.swatchRow:last-child {
+  border-bottom: 1px solid var(--ds-border-default);
+}
+
+.swatchChip {
+  width: 44px;
+  height: 24px;
+  border: 1px solid var(--ds-border-default);
+  border-radius: var(--ds-radius-sm);
+}
+
+.swatchName {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-sm);
+}
+
+.swatchRole {
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-sm);
+}
+
+.statusRow {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-md);
+  border: 1px solid;
+  font-size: var(--ds-text-md);
+}
+
+.typeSample {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+}
+
+.typeRow {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: var(--ds-space-3);
+  align-items: baseline;
+  min-height: 32px;
+  border-top: 1px solid var(--ds-border-default);
+  padding: var(--ds-space-1) 0;
+}
+
+.typeMeta {
+  color: var(--ds-text-muted);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-xs);
+}
+
+.monoBlock {
+  margin: 0;
+  padding: var(--ds-space-3);
+  background: var(--ds-surface-inset);
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-sm);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--ds-leading-loose);
+  overflow-x: auto;
+}
+
+.spaceBar {
+  height: 12px;
+  background: var(--ds-selection);
+  border-radius: var(--ds-radius-sm);
+}
+
+.spaceRow {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: var(--ds-space-3);
+  align-items: center;
+}
+
+.radiusChip {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 72px;
+  height: 48px;
+  padding-bottom: var(--ds-space-1);
+  background: var(--ds-surface-raised);
+  border: 1px solid var(--ds-border-strong);
+  color: var(--ds-text-muted);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-xs);
+}
+
+.shadowChip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 64px;
+  background: var(--ds-surface-raised);
+  border: 1px solid var(--ds-border-default);
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-text-muted);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-xs);
+}
+
+/* Miniature graph-canvas demo for graph tokens. */
+.graphDemo {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background-color: var(--ds-graph-canvas);
+  background-image:
+    linear-gradient(var(--ds-graph-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ds-graph-grid) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border: 1px solid var(--ds-border-default);
+  border-radius: var(--ds-radius-md);
+}
+
+.graphNode {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 132px;
+  padding: var(--ds-space-2) var(--ds-space-3);
+  background: var(--ds-graph-node-surface);
+  border: 1px solid var(--ds-graph-node-border);
+  border-radius: var(--ds-radius-md);
+  font-size: var(--ds-text-sm);
+}
+
+.graphNodeSelected {
+  border-color: var(--ds-graph-node-selected);
+  box-shadow: 0 0 0 1px var(--ds-graph-node-selected);
+}
+
+.graphNodeUnsupported {
+  border-style: dashed;
+  border-color: var(--ds-graph-node-unsupported);
+  color: var(--ds-text-secondary);
+}
+
+.graphNodeKind {
+  color: var(--ds-text-muted);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-xs);
+}
+
+.graphPort {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--ds-radius-full);
+  border: 2px solid var(--ds-surface-raised);
+}
+
+/* ── Section-specific demos ───────────────────────────────────────── */
+
+.splitDemo {
+  height: 320px;
+  border: 1px solid var(--ds-border-default);
+  border-radius: var(--ds-radius-md);
+  overflow: hidden;
+  background: var(--ds-surface-default);
+}
+
+.splitPaneContent {
+  padding: var(--ds-space-3);
+}
+
+.splitPaneHeading {
+  margin: 0 0 var(--ds-space-2);
+  color: var(--ds-text-muted);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-xs);
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+}
+
+.canvasPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: var(--ds-graph-canvas);
+  background-image:
+    linear-gradient(var(--ds-graph-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ds-graph-grid) 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: var(--ds-text-muted);
+  font-size: var(--ds-text-sm);
+}
+
+.densityDemo {
+  padding: var(--ds-space-4);
+  border: 1px solid var(--ds-border-default);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-surface-default);
+}
+
+@media (max-width: 900px) {
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .header > :last-child {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .nav {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .navKicker {
+    width: 100%;
+  }
+  .section {
+    scroll-margin-top: 112px;
+  }
+}
+
+@media (max-width: 560px) {
+  .header,
+  .shell {
+    padding-right: var(--ds-space-4);
+    padding-left: var(--ds-space-4);
+  }
+
+  .headerTitle {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .swatchRow {
+    grid-template-columns: 36px minmax(0, 1fr);
+  }
+
+  .swatchChip {
+    width: 36px;
+  }
+
+  .swatchRole {
+    grid-column: 2;
+    padding-bottom: var(--ds-space-2);
+  }
+
+  .graphDemo {
+    overflow-x: auto;
+  }
+}

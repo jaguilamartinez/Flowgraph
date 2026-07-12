@@ -1,0 +1,12 @@
+.content {
+  z-index: var(--ds-z-dropdown);
+  max-width: 280px;
+  padding: var(--ds-space-1) var(--ds-space-2);
+  background: var(--ds-tooltip-surface);
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-tooltip-text);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  line-height: var(--ds-leading-normal);
+  box-shadow: var(--ds-shadow-overlay);
+}

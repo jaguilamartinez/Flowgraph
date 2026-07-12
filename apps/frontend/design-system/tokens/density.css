@@ -1,0 +1,36 @@
+/**
+ * Density tokens.
+ *
+ * Two supported densities (product spec §14.3):
+ *   - comfortable (default): onboarding and review
+ *   - compact: large graphs, tables, expert workflows
+ *
+ * Density changes spacing and control/row heights through these tokens
+ * only. It never hides labels, changes information architecture, or
+ * reduces hit targets below accessibility requirements (24 px minimum).
+ *
+ * Apply `data-density="compact"` on the root element or any subtree.
+ */
+
+:root,
+[data-density="comfortable"] {
+  --ds-control-height: 40px;
+  --ds-control-height-sm: 32px;
+  --ds-row-height: 44px;
+  --ds-control-padding-x: 12px;
+  --ds-control-gap: 8px;
+  --ds-field-gap: 6px;
+  --ds-panel-padding: 16px;
+  --ds-stack-gap: 16px;
+}
+
+[data-density="compact"] {
+  --ds-control-height: 32px;
+  --ds-control-height-sm: 28px;
+  --ds-row-height: 36px;
+  --ds-control-padding-x: 10px;
+  --ds-control-gap: 6px;
+  --ds-field-gap: 4px;
+  --ds-panel-padding: 12px;
+  --ds-stack-gap: 12px;
+}

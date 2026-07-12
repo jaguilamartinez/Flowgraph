@@ -1,0 +1,159 @@
+.input {
+  display: block;
+  width: 100%;
+  height: var(--ds-control-height);
+  padding: 0 var(--ds-control-padding-x);
+  background: var(--ds-surface-raised);
+  border: 1px solid var(--ds-border-default);
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-md);
+  line-height: var(--ds-leading-normal);
+  transition: border-color var(--ds-duration-fast) var(--ds-ease);
+}
+
+.input::placeholder {
+  color: var(--ds-text-muted);
+}
+
+.input:hover:not(:disabled) {
+  border-color: var(--ds-border-strong);
+}
+
+.input:focus-visible {
+  outline: var(--ds-focus-ring-width) solid var(--ds-focus-ring);
+  outline-offset: 1px;
+}
+
+.input:disabled {
+  background: var(--ds-surface-inset);
+  color: var(--ds-text-muted);
+  cursor: not-allowed;
+}
+
+.invalid,
+.invalid:hover:not(:disabled) {
+  border-color: var(--ds-status-danger-icon);
+}
+
+.textarea {
+  height: auto;
+  min-height: calc(var(--ds-control-height) * 2);
+  padding: var(--ds-space-2) var(--ds-control-padding-x);
+  resize: vertical;
+}
+
+.mono {
+  font-family: var(--ds-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Adorned inputs (unit suffix, steppers) share a framed container. */
+.frame {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: var(--ds-control-height);
+  background: var(--ds-surface-raised);
+  border: 1px solid var(--ds-border-default);
+  border-radius: var(--ds-radius-md);
+  transition: border-color var(--ds-duration-fast) var(--ds-ease);
+}
+.frame:hover:not(.frameDisabled) {
+  border-color: var(--ds-border-strong);
+}
+.frame:focus-within {
+  outline: var(--ds-focus-ring-width) solid var(--ds-focus-ring);
+  outline-offset: 1px;
+}
+.frameDisabled {
+  background: var(--ds-surface-inset);
+  cursor: not-allowed;
+}
+.frameInvalid,
+.frameInvalid:hover:not(.frameDisabled) {
+  border-color: var(--ds-status-danger-icon);
+}
+
+.frameInput {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 var(--ds-control-padding-x);
+  background: transparent;
+  border: 0;
+  color: var(--ds-text-primary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-md);
+}
+.frameInput::placeholder {
+  color: var(--ds-text-muted);
+}
+.frameInput:focus {
+  outline: none;
+}
+.frameInput:disabled {
+  color: var(--ds-text-muted);
+  cursor: not-allowed;
+}
+
+/* Hide native number spinners; the design system provides its own. */
+.frameInput[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  font-family: var(--ds-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+.frameInput[type="number"]::-webkit-outer-spin-button,
+.frameInput[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.unit {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--ds-control-padding-x);
+  border-left: 1px solid var(--ds-border-default);
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-sm);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.steppers {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--ds-border-default);
+}
+
+.stepButton {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+}
+.stepButton + .stepButton {
+  border-top: 1px solid var(--ds-border-default);
+}
+.stepButton:hover:not(:disabled) {
+  background: var(--ds-action-secondary-hover);
+  color: var(--ds-text-primary);
+}
+.stepButton:focus-visible {
+  outline: var(--ds-focus-ring-width) solid var(--ds-focus-ring);
+  outline-offset: -2px;
+}
+.stepButton:disabled {
+  color: var(--ds-text-muted);
+  cursor: not-allowed;
+  opacity: 0.5;
+}

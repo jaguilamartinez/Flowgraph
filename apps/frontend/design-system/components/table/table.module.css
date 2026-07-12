@@ -1,0 +1,76 @@
+.scroller {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--ds-border-default);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-surface-default);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-md);
+}
+
+.caption {
+  padding: var(--ds-space-2) var(--ds-space-3);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-text-sm);
+  text-align: left;
+  caption-side: bottom;
+  border-top: 1px solid var(--ds-border-default);
+}
+
+.headerCell {
+  height: calc(var(--ds-row-height) - 8px);
+  padding: 0 var(--ds-space-3);
+  border-bottom: 1px solid var(--ds-border-default);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  letter-spacing: var(--ds-tracking-caps);
+  text-transform: uppercase;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.row {
+  border-bottom: 1px solid var(--ds-border-default);
+}
+.row:last-child {
+  border-bottom: 0;
+}
+
+.interactive .row:hover {
+  background: var(--ds-action-secondary-hover);
+}
+
+.interactive .row:focus-visible {
+  outline: var(--ds-focus-ring-width) solid var(--ds-focus-ring);
+  outline-offset: -2px;
+}
+
+.rowSelected,
+.interactive .rowSelected:hover {
+  background: var(--ds-selection-surface);
+  box-shadow: inset 2px 0 0 var(--ds-selection);
+}
+
+.cell {
+  height: var(--ds-row-height);
+  padding: 0 var(--ds-space-3);
+  color: var(--ds-text-primary);
+  vertical-align: middle;
+}
+
+.numeric {
+  font-family: var(--ds-font-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.mono {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-sm);
+}

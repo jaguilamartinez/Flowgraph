@@ -1,0 +1,232 @@
+/**
+ * Design-system semantic tokens.
+ *
+ * The only color vocabulary feature code may use. Each token maps a
+ * primitive to a meaning: surfaces, text, borders, actions, focus,
+ * status, and graph-specific roles.
+ *
+ * Themes: light is the default; `[data-theme="dark"]` switches to the
+ * graphite dark theme. A small inline script in the root layout resolves
+ * the system preference to an explicit `data-theme` before first paint.
+ * Forced-colors mode defers to system colors (see the final block).
+ */
+
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  /* Surfaces */
+  --ds-surface-canvas: var(--ds-neutral-100);
+  --ds-surface-default: var(--ds-neutral-50);
+  --ds-surface-raised: var(--ds-neutral-0);
+  --ds-surface-overlay: var(--ds-neutral-0);
+  --ds-surface-inset: var(--ds-neutral-150);
+
+  /* Text */
+  --ds-text-primary: #191a18;
+  --ds-text-secondary: var(--ds-neutral-600);
+  --ds-text-muted: var(--ds-neutral-500);
+  --ds-text-inverse: var(--ds-neutral-50);
+  --ds-text-on-accent: #ffffff;
+  --ds-text-link: var(--ds-blue-700);
+  --ds-text-link-hover: var(--ds-blue-800);
+  --ds-tooltip-surface: var(--ds-neutral-800);
+  --ds-tooltip-text: var(--ds-neutral-50);
+
+  /* Borders */
+  --ds-border-default: var(--ds-neutral-200);
+  --ds-border-strong: var(--ds-neutral-400);
+
+  /* Actions */
+  --ds-action-primary: var(--ds-rust-600);
+  --ds-action-primary-hover: var(--ds-rust-700);
+  --ds-action-primary-active: var(--ds-rust-800);
+  --ds-action-secondary-hover: var(--ds-neutral-150);
+  --ds-action-secondary-active: var(--ds-neutral-200);
+  --ds-action-danger: var(--ds-red-600);
+  --ds-action-danger-hover: var(--ds-red-700);
+  --ds-action-danger-active: var(--ds-red-800);
+
+  /* Focus and selection */
+  --ds-focus-ring: var(--ds-blue-600);
+  --ds-selection: var(--ds-blue-600);
+  --ds-selection-surface: var(--ds-blue-50);
+
+  /* Status — info */
+  --ds-status-info-text: var(--ds-blue-700);
+  --ds-status-info-icon: var(--ds-blue-600);
+  --ds-status-info-surface: var(--ds-blue-50);
+  --ds-status-info-border: var(--ds-blue-200);
+
+  /* Status — success (deterministically verified only) */
+  --ds-status-success-text: var(--ds-green-700);
+  --ds-status-success-icon: var(--ds-green-600);
+  --ds-status-success-surface: var(--ds-green-50);
+  --ds-status-success-border: var(--ds-green-200);
+
+  /* Status — warning */
+  --ds-status-warning-text: var(--ds-amber-700);
+  --ds-status-warning-icon: var(--ds-amber-500);
+  --ds-status-warning-surface: var(--ds-amber-50);
+  --ds-status-warning-border: var(--ds-amber-200);
+
+  /* Status — danger */
+  --ds-status-danger-text: var(--ds-red-700);
+  --ds-status-danger-icon: var(--ds-red-600);
+  --ds-status-danger-surface: var(--ds-red-50);
+  --ds-status-danger-border: var(--ds-red-200);
+
+  /* Status — assistant proposal (unapplied AI-originated changes only) */
+  --ds-status-proposal-text: var(--ds-purple-700);
+  --ds-status-proposal-icon: var(--ds-purple-600);
+  --ds-status-proposal-surface: var(--ds-purple-50);
+  --ds-status-proposal-border: var(--ds-purple-200);
+
+  /* Status — neutral */
+  --ds-status-neutral-text: var(--ds-neutral-600);
+  --ds-status-neutral-icon: var(--ds-neutral-500);
+  --ds-status-neutral-surface: var(--ds-neutral-150);
+  --ds-status-neutral-border: var(--ds-neutral-200);
+
+  /* Elevation — reserved for overlays, menus, dialogs, dragged items */
+  --ds-shadow-raised: 0 1px 2px rgba(25, 26, 24, 0.06);
+  --ds-shadow-overlay:
+    0 4px 16px rgba(25, 26, 24, 0.12), 0 1px 3px rgba(25, 26, 24, 0.08);
+  --ds-shadow-dialog:
+    0 12px 32px rgba(25, 26, 24, 0.18), 0 2px 8px rgba(25, 26, 24, 0.1);
+  --ds-scrim: rgba(25, 26, 24, 0.4);
+
+  /* Graph-specific */
+  --ds-graph-canvas: #efeee9;
+  --ds-graph-grid: #e2e1da;
+  --ds-graph-node-surface: var(--ds-neutral-0);
+  --ds-graph-node-border: var(--ds-neutral-300);
+  --ds-graph-node-selected: var(--ds-blue-600);
+  --ds-graph-node-unsupported: var(--ds-neutral-400);
+  --ds-graph-edge-default: var(--ds-neutral-400);
+  --ds-graph-edge-selected: var(--ds-blue-600);
+  --ds-graph-edge-invalid: var(--ds-red-600);
+  --ds-graph-port-compatible: var(--ds-green-600);
+  --ds-graph-port-incompatible: var(--ds-neutral-300);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Surfaces — graphite, not pure black */
+  --ds-surface-canvas: var(--ds-neutral-900);
+  --ds-surface-default: var(--ds-neutral-850);
+  --ds-surface-raised: var(--ds-neutral-800);
+  --ds-surface-overlay: var(--ds-neutral-750);
+  --ds-surface-inset: var(--ds-neutral-950);
+
+  /* Text */
+  --ds-text-primary: #ecede8;
+  --ds-text-secondary: var(--ds-neutral-300);
+  --ds-text-muted: var(--ds-neutral-400);
+  --ds-text-inverse: #191a18;
+  --ds-text-on-accent: #ffffff;
+  --ds-text-link: var(--ds-blue-300);
+  --ds-text-link-hover: var(--ds-blue-200);
+  --ds-tooltip-surface: var(--ds-neutral-150);
+  --ds-tooltip-text: var(--ds-neutral-900);
+
+  /* Borders */
+  --ds-border-default: var(--ds-neutral-750);
+  --ds-border-strong: var(--ds-neutral-600);
+
+  /* Actions */
+  --ds-action-primary: var(--ds-rust-500);
+  --ds-action-primary-hover: var(--ds-rust-400);
+  --ds-action-primary-active: var(--ds-rust-300);
+  --ds-action-secondary-hover: var(--ds-neutral-750);
+  --ds-action-secondary-active: var(--ds-neutral-700);
+  --ds-action-danger: var(--ds-red-500);
+  --ds-action-danger-hover: var(--ds-red-400);
+  --ds-action-danger-active: var(--ds-red-300);
+
+  /* Focus and selection */
+  --ds-focus-ring: var(--ds-blue-300);
+  --ds-selection: var(--ds-blue-300);
+  --ds-selection-surface: var(--ds-blue-900);
+
+  /* Status — info */
+  --ds-status-info-text: var(--ds-blue-300);
+  --ds-status-info-icon: var(--ds-blue-400);
+  --ds-status-info-surface: #10293c;
+  --ds-status-info-border: var(--ds-blue-800);
+
+  /* Status — success */
+  --ds-status-success-text: var(--ds-green-300);
+  --ds-status-success-icon: var(--ds-green-400);
+  --ds-status-success-surface: #10301f;
+  --ds-status-success-border: var(--ds-green-800);
+
+  /* Status — warning */
+  --ds-status-warning-text: var(--ds-amber-300);
+  --ds-status-warning-icon: var(--ds-amber-400);
+  --ds-status-warning-surface: #33270a;
+  --ds-status-warning-border: var(--ds-amber-800);
+
+  /* Status — danger */
+  --ds-status-danger-text: var(--ds-red-300);
+  --ds-status-danger-icon: var(--ds-red-400);
+  --ds-status-danger-surface: #3a1512;
+  --ds-status-danger-border: var(--ds-red-800);
+
+  /* Status — assistant proposal */
+  --ds-status-proposal-text: var(--ds-purple-300);
+  --ds-status-proposal-icon: var(--ds-purple-400);
+  --ds-status-proposal-surface: #262038;
+  --ds-status-proposal-border: var(--ds-purple-800);
+
+  /* Status — neutral */
+  --ds-status-neutral-text: var(--ds-neutral-300);
+  --ds-status-neutral-icon: var(--ds-neutral-400);
+  --ds-status-neutral-surface: var(--ds-neutral-800);
+  --ds-status-neutral-border: var(--ds-neutral-700);
+
+  /* Elevation */
+  --ds-shadow-raised: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --ds-shadow-overlay:
+    0 4px 16px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
+  --ds-shadow-dialog:
+    0 12px 32px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.45);
+  --ds-scrim: rgba(0, 0, 0, 0.55);
+
+  /* Graph-specific */
+  --ds-graph-canvas: #171815;
+  --ds-graph-grid: #24251f;
+  --ds-graph-node-surface: var(--ds-neutral-850);
+  --ds-graph-node-border: var(--ds-neutral-600);
+  --ds-graph-node-selected: var(--ds-blue-300);
+  --ds-graph-node-unsupported: var(--ds-neutral-500);
+  --ds-graph-edge-default: var(--ds-neutral-500);
+  --ds-graph-edge-selected: var(--ds-blue-300);
+  --ds-graph-edge-invalid: var(--ds-red-400);
+  --ds-graph-port-compatible: var(--ds-green-400);
+  --ds-graph-port-incompatible: var(--ds-neutral-600);
+}
+
+/*
+ * Focus ring. Rendered with `outline` so forced-colors mode replaces it
+ * with the system highlight automatically. Visually distinct from
+ * selection borders (offset ring vs. filled border).
+ */
+:root {
+  --ds-focus-ring-width: 2px;
+  --ds-focus-ring-offset: 2px;
+}
+
+/*
+ * Forced-colors (Windows High Contrast) defers to system colors rather
+ * than preserving brand color.
+ */
+@media (forced-colors: active) {
+  :root,
+  :root[data-theme="dark"] {
+    --ds-shadow-raised: none;
+    --ds-shadow-overlay: none;
+    --ds-shadow-dialog: none;
+  }
+}

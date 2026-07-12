@@ -1,0 +1,131 @@
+/* Status coloring shared by InlineAlert and Banner. */
+.neutral {
+  --alert-text: var(--ds-status-neutral-text);
+  --alert-icon: var(--ds-status-neutral-icon);
+  --alert-surface: var(--ds-status-neutral-surface);
+  --alert-border: var(--ds-status-neutral-border);
+}
+.info {
+  --alert-text: var(--ds-status-info-text);
+  --alert-icon: var(--ds-status-info-icon);
+  --alert-surface: var(--ds-status-info-surface);
+  --alert-border: var(--ds-status-info-border);
+}
+.success {
+  --alert-text: var(--ds-status-success-text);
+  --alert-icon: var(--ds-status-success-icon);
+  --alert-surface: var(--ds-status-success-surface);
+  --alert-border: var(--ds-status-success-border);
+}
+.warning {
+  --alert-text: var(--ds-status-warning-text);
+  --alert-icon: var(--ds-status-warning-icon);
+  --alert-surface: var(--ds-status-warning-surface);
+  --alert-border: var(--ds-status-warning-border);
+}
+.danger {
+  --alert-text: var(--ds-status-danger-text);
+  --alert-icon: var(--ds-status-danger-icon);
+  --alert-surface: var(--ds-status-danger-surface);
+  --alert-border: var(--ds-status-danger-border);
+}
+.proposal {
+  --alert-text: var(--ds-status-proposal-text);
+  --alert-icon: var(--ds-status-proposal-icon);
+  --alert-surface: var(--ds-status-proposal-surface);
+  --alert-border: var(--ds-status-proposal-border);
+}
+
+.inlineAlert {
+  display: flex;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-3);
+  background: var(--alert-surface);
+  border: 1px solid var(--alert-border);
+  border-radius: var(--ds-radius-md);
+}
+
+.icon {
+  flex: none;
+  margin-top: 1px;
+  color: var(--alert-icon);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-1);
+  min-width: 0;
+  font-size: var(--ds-text-md);
+  line-height: var(--ds-leading-normal);
+}
+
+.title {
+  color: var(--alert-text);
+  font-weight: var(--ds-weight-semibold);
+}
+
+.bodyText {
+  color: var(--ds-text-primary);
+}
+
+.actions {
+  display: flex;
+  gap: var(--ds-space-2);
+  margin-top: var(--ds-space-1);
+}
+
+/* Banner — full-width edge-to-edge strip. */
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  width: 100%;
+  min-height: var(--ds-control-height-sm);
+  padding: var(--ds-space-2) var(--ds-space-3);
+  background: var(--alert-surface);
+  border: 1px solid var(--alert-border);
+  border-radius: var(--ds-radius-md);
+  font-size: var(--ds-text-md);
+}
+
+.bannerText {
+  flex: 1;
+  min-width: 0;
+  color: var(--ds-text-primary);
+}
+.bannerText strong {
+  color: var(--alert-text);
+  font-weight: var(--ds-weight-semibold);
+}
+
+/* StatusMessage — quiet inline status line (save state, validation). */
+.statusMessage {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  color: var(--alert-text);
+  font-size: var(--ds-text-sm);
+  line-height: 1;
+}
+
+.statusMessageIcon {
+  color: var(--alert-icon);
+}
+
+.spinner {
+  color: var(--ds-text-secondary);
+  animation: ds-status-spin 0.8s linear infinite;
+}
+
+@keyframes ds-status-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}

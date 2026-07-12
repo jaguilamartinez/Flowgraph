@@ -1,0 +1,89 @@
+.root {
+  position: relative;
+  width: 100%;
+}
+
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--ds-control-padding-x);
+  color: var(--ds-text-muted);
+  pointer-events: none;
+}
+
+.input {
+  padding-left: calc(var(--ds-control-padding-x) + 22px);
+  padding-right: calc(var(--ds-control-padding-x) + 22px);
+}
+
+.chevron {
+  position: absolute;
+  right: var(--ds-control-padding-x);
+  color: var(--ds-text-secondary);
+  pointer-events: none;
+}
+
+.listbox {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: var(--ds-z-dropdown);
+  max-height: 280px;
+  overflow-y: auto;
+  padding: var(--ds-space-1);
+  margin: 0;
+  list-style: none;
+  background: var(--ds-surface-overlay);
+  border: 1px solid var(--ds-border-default);
+  border-radius: var(--ds-radius-md);
+  box-shadow: var(--ds-shadow-overlay);
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  cursor: pointer;
+}
+.option[data-active="true"] {
+  background: var(--ds-action-secondary-hover);
+}
+.option[aria-disabled="true"] {
+  color: var(--ds-text-muted);
+  cursor: not-allowed;
+}
+
+.optionLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  font-size: var(--ds-text-md);
+  color: var(--ds-text-primary);
+}
+
+.optionCheck {
+  display: inline-flex;
+  width: 16px;
+  flex: none;
+  color: var(--ds-action-primary);
+}
+
+.optionDescription {
+  padding-left: calc(16px + var(--ds-space-2));
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-text-sm);
+}
+
+.empty {
+  padding: var(--ds-space-3);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-text-sm);
+}

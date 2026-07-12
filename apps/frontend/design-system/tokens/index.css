@@ -1,0 +1,8 @@
+/**
+ * Design-system token entry point.
+ * Import once from the application root layout.
+ */
+
+@import "./primitives.css";
+@import "./semantic.css";
+@import "./density.css";

@@ -1,0 +1,85 @@
+.accordion {
+  border: 1px solid var(--ds-border-default);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-surface-default);
+}
+
+.item + .item {
+  border-top: 1px solid var(--ds-border-default);
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-2);
+  width: 100%;
+  min-height: var(--ds-row-height);
+  padding: 0 var(--ds-panel-padding);
+  background: transparent;
+  border: 0;
+  color: var(--ds-text-primary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-md);
+  font-weight: var(--ds-weight-medium);
+  text-align: left;
+  cursor: pointer;
+}
+.trigger:hover {
+  background: var(--ds-action-secondary-hover);
+}
+.trigger:focus-visible {
+  outline: var(--ds-focus-ring-width) solid var(--ds-focus-ring);
+  outline-offset: -2px;
+}
+
+.chevron {
+  flex: none;
+  color: var(--ds-text-secondary);
+  transition: transform var(--ds-duration-medium) var(--ds-ease);
+}
+.trigger[data-state="open"] .chevron {
+  transform: rotate(180deg);
+}
+
+.panel {
+  overflow: hidden;
+  padding: 0 var(--ds-panel-padding) var(--ds-panel-padding);
+  color: var(--ds-text-primary);
+  font-size: var(--ds-text-md);
+  line-height: var(--ds-leading-normal);
+}
+
+/* Collapsible — inline disclosure without the framed container. */
+.collapsibleTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  padding: var(--ds-space-1) 0;
+  background: transparent;
+  border: 0;
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  cursor: pointer;
+}
+.collapsibleTrigger:hover {
+  color: var(--ds-text-primary);
+}
+.collapsibleTrigger:focus-visible {
+  outline: var(--ds-focus-ring-width) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-focus-ring-offset);
+  border-radius: var(--ds-radius-sm);
+}
+
+.collapsibleChevron {
+  transition: transform var(--ds-duration-medium) var(--ds-ease);
+}
+.collapsibleTrigger[data-state="open"] .collapsibleChevron {
+  transform: rotate(90deg);
+}
+
+.collapsibleContent {
+  padding: var(--ds-space-2) 0 0 calc(14px + var(--ds-space-1));
+}

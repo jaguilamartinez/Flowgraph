@@ -1,0 +1,150 @@
+/* Status coloring shared by Badge and StatusIndicator. */
+.neutral {
+  --status-text: var(--ds-status-neutral-text);
+  --status-icon: var(--ds-status-neutral-icon);
+  --status-surface: var(--ds-status-neutral-surface);
+  --status-border: var(--ds-status-neutral-border);
+}
+.info {
+  --status-text: var(--ds-status-info-text);
+  --status-icon: var(--ds-status-info-icon);
+  --status-surface: var(--ds-status-info-surface);
+  --status-border: var(--ds-status-info-border);
+}
+.success {
+  --status-text: var(--ds-status-success-text);
+  --status-icon: var(--ds-status-success-icon);
+  --status-surface: var(--ds-status-success-surface);
+  --status-border: var(--ds-status-success-border);
+}
+.warning {
+  --status-text: var(--ds-status-warning-text);
+  --status-icon: var(--ds-status-warning-icon);
+  --status-surface: var(--ds-status-warning-surface);
+  --status-border: var(--ds-status-warning-border);
+}
+.danger {
+  --status-text: var(--ds-status-danger-text);
+  --status-icon: var(--ds-status-danger-icon);
+  --status-surface: var(--ds-status-danger-surface);
+  --status-border: var(--ds-status-danger-border);
+}
+.proposal {
+  --status-text: var(--ds-status-proposal-text);
+  --status-icon: var(--ds-status-proposal-icon);
+  --status-surface: var(--ds-status-proposal-surface);
+  --status-border: var(--ds-status-proposal-border);
+}
+
+/* ── Badge ────────────────────────────────────────────────────────── */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  height: 20px;
+  padding: 0 var(--ds-space-2);
+  background: var(--status-surface);
+  border: 1px solid var(--status-border);
+  border-radius: var(--ds-radius-sm);
+  color: var(--status-text);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.badgeMono {
+  font-family: var(--ds-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── StatusIndicator ──────────────────────────────────────────────── */
+
+.indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  color: var(--ds-text-primary);
+  font-size: var(--ds-text-md);
+  line-height: 1;
+}
+
+.dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--ds-radius-full);
+  background: var(--status-icon);
+}
+
+.running .dot {
+  animation: ds-indicator-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes ds-indicator-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .running .dot {
+    animation: none;
+  }
+}
+
+.indicatorDetail {
+  color: var(--ds-text-muted);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Progress ─────────────────────────────────────────────────────── */
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-1);
+  width: 100%;
+}
+
+.progressHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-2);
+}
+
+.progressLabel {
+  color: var(--ds-text-primary);
+  font-size: var(--ds-text-sm);
+}
+
+.progressValue {
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.progressTrack {
+  position: relative;
+  height: 6px;
+  overflow: hidden;
+  background: var(--ds-surface-inset);
+  border-radius: var(--ds-radius-full);
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--ds-status-info-icon);
+  border-radius: var(--ds-radius-full);
+  transition: width var(--ds-duration-medium) var(--ds-ease);
+}

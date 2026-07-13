@@ -1,8 +1,8 @@
 # Flowgraph AI
 
-Flowgraph AI is the development workspace for a planned simulation-configuration application built around a versioned Flowgraph intermediate representation, a Next.js interface, a FastAPI control plane, and a Kratos execution service. The repository currently provides interface and service scaffolding; the new intermediate representation, language-model integration, compiler, and production execution path are not yet implemented.
+This is a development workspace for a planned simulation-configuration application built around a versioned Flowgraph intermediate representation, a Next.js interface, a FastAPI control plane that interacts with LLMs, and a Kratos execution service. The repository currently provides interface and service scaffolding; the new intermediate representation, language-model integration, compiler, and production execution path are not yet implemented.
 
-The original Express/LiteGraph editor remains available as a compatibility and migration reference under [`apps/flowgraph-legacy`](./apps/flowgraph-legacy/README.md). New application code must not import implementation details directly from the legacy editor; reusable behavior should be extracted behind explicit schemas, contracts, or packages.
+The original Express/LiteGraph editor remains available as a compatibility and migration reference under [`apps/flowgraph-legacy`](./apps/flowgraph-legacy/README.md).
 
 ## Repository layout
 
